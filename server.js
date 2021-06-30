@@ -6,6 +6,7 @@ const errorHandler = require('./middlewares/error_handler.js');
 // const beatsController = require('./controllers/beats_controller.js');
 const { request } = require('express');
 const sessionsController = require('./controllers/sessions_controller.js')
+const api_key = 414837986633473;
 
 // var session = require('express-session');
 
