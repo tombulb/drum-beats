@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const app = express();
 const logger = require('./middlewares/logger.js');
@@ -8,6 +10,7 @@ const { request } = require('express');
 const sessionsController = require('./controllers/sessions_controller.js')
 const api_key = 414837986633473;
 
+<<<<<<< HEAD
 // var session = require('express-session');
 
 // // Use the session middleware
@@ -26,6 +29,21 @@ const api_key = 414837986633473;
 //   }
 //   console.log(req);
 // })
+=======
+// Use the session middleware
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+// Access the session as req.session
+app.get('/', (req, res, next) => {
+  if (req.session.user_id) {
+    console.log('works');
+  } else {
+    req.session.user_id = 1
+    res.end('welcome to the session demo. refresh!')
+  }
+  // console.log(req);
+})
+>>>>>>> clear desk
 
 app.listen(port, () => {
     console.log(`listening on port ${port} ...`);
