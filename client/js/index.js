@@ -6,7 +6,6 @@ const appContainer = document.querySelector('.app-container');
 const uploadForm = document.querySelector('.upload-form');
 const uploadInput = document.querySelector('.upload-input')
 
-// functions
 
 function handleLogin(e) {
     e.preventDefault();
