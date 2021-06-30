@@ -16,7 +16,58 @@ CREATE TABLE users (
     password TEXT
 );
 
-INSERT INTO users (user_name, password) VALUES ('test artist 1', 'pudding');
+INSERT INTO users (
+  user_name,
+  password
+  ) VALUES (
+    'test artist 1',
+    'pudding'
+    );
 
-INSERT INTO tracks (track_name, user_id, cloudinary_url, genres)
-VALUES ('test name 1', 1, 'test_url_1', 'rock,metal,country');
+INSERT INTO tracks (
+  track_name, 
+  user_id, 
+  cloudinary_url, 
+  genres
+  ) VALUES (
+    'terra incognita',
+    1,
+    'cloudinaryurl',
+    'rock'
+    );
+
+INSERT INTO tracks (
+  track_name, 
+  user_id, 
+  cloudinary_url, 
+  genres
+  ) VALUES (
+    'disembowelled with a soup spoon',
+    1,
+    'cloudinaryurl',
+    'metal'
+    );
+
+INSERT INTO tracks (
+  track_name, 
+  user_id, 
+  cloudinary_url, 
+  genres
+  ) VALUES (
+    'paft dunk',
+    2,
+    'cloudinaryurl',
+    'house'
+    );
+
+INSERT INTO tracks (
+  track_name, 
+  user_id, 
+  cloudinary_url, 
+  genres
+  ) VALUES (
+    'massive effect',
+    3,
+    'cloudinaryurl',
+    'drum n bass'
+    );
