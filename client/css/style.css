@@ -1,0 +1,32 @@
+body {
+    min-height: 100vh;
+}
+
+.app-container {
+    display: none;
+    height: 100vh;
+    grid-template-rows: 2fr 15fr 1fr
+}
+
+.log-in-box {
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-in-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: mistyrose;
+}
+
+header, main, footer, .console-section, .feed-section {
+    border: 1px solid black;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 3fr 6fr;
+}
