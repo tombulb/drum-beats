@@ -4,6 +4,7 @@ const loginForm = document.querySelector('.log-in-form');
 const loginContainer = document.querySelector('.log-in-container');
 const appContainer = document.querySelector('.app-container');
 
+
 // functions
 
 let data = {
@@ -31,3 +32,24 @@ function handleLoggedIn(e) {
 
 
 loginForm.addEventListener('submit', handleLogin);
+
+
+axios.get('/api/tracks').then(res => {
+  
+  let dbTracks = res.data
+  
+  dbTracks.forEach(track => {
+    const trackDisplay = document.createElement('figure')
+
+    const trackTitle = document.createElement('figcaption')
+    trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
+
+    const audioPlayer = document.createElement('audio')
+    audioPlayer.setAttribute('controls', 'true')
+    audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+
+    document.querySelector('.feed-section').appendChild(trackDisplay)
+    document.querySelector('figure').appendChild(trackTitle)
+    document.querySelector('figure').appendChild(audioPlayer)
+  })
+})
