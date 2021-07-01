@@ -6,7 +6,6 @@ const appContainer = document.querySelector('.app-container');
 const uploadForm = document.querySelector('.upload-form');
 const uploadInput = document.querySelector('.upload-input')
 
-// functions
 
 function handleLogin(e) {
     e.preventDefault();
@@ -64,15 +63,11 @@ axios.get('/api/tracks').then(res => {
 
 function handleUpload(e) {
   e.preventDefault()
-  debugger
   var files = uploadInput.files;
   var file = files[0];
-  var reqCon = "request sent"
+
   var formData = new FormData();
-  
-  // formData.append('file', file);
-  formData.append('con', reqCon)
-  // debugger
+  formData.append('track', file)
 
   axios({
     method: "post",
@@ -80,15 +75,12 @@ function handleUpload(e) {
     data: formData,
     headers: { "Content-Type": "multipart/form-data" },
   })
-    .then(function (response) {
-      //handle success
+    .then(response => {
       console.log('response');
     })
-    .catch(function () {
-      //handle error
-      console.log('it didnt work');
+    .catch(err => {
+      console.log(err);
     });
-    // debugger
 }
 
 uploadForm.addEventListener('submit', handleUpload);
