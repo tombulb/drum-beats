@@ -7,19 +7,15 @@ const appContainer = document.querySelector('.app-container');
 
 // functions
 
-let data = {
-    username: 'start',
-    password: 'start'
-}
-
 function handleLogin(e) {
     e.preventDefault();
     let data = Object.fromEntries(new FormData(loginForm));
     console.log(data);
-    axios.get(`/api/sessions`,{
+    axios.post(`/api/sessions`, {
         params: {username: data.username, password: data.password}
     }).then(res => {
-        if (res.data.login) {
+        console.log(res)
+        if (res.data.authenticated) {
             handleLoggedIn();
         }
     })
@@ -30,9 +26,19 @@ function handleLoggedIn(e) {
     appContainer.style.display = 'grid';
 }
 
+// event listeners
 
 loginForm.addEventListener('submit', handleLogin);
 
+// axios requests on '/' static load
+
+
+axios.get('/api/sessions').then(res => {
+    console.log(res.data)
+    if (res.data.authenticated) {
+        handleLoggedIn();
+    }
+})
 
 axios.get('/api/tracks').then(res => {
   

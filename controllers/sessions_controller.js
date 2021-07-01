@@ -3,10 +3,21 @@ const router = express.Router();
 var session = require('express-session');
 
 router.get('/', (req, res) => {
-    if (req.query.username === 'demo' && req.query.password === 'demo') {
-        res.json({login: true});
+    console.log(req.sessionID);
+    if (req.session.user_id === 1) {
+        res.json({authenticated: true});
     } else {
-        res.json({login: false})
+        res.json({authenticated: false})
+    }
+})
+
+router.post('/', (req, res) => {
+    console.log(req.body)
+    if (req.body.params.username === 'demo' && req.body.params.password) {
+        req.session.user_id = 1;
+        res.json({authenticated: true})
+    } else {
+        res.json({authenticated: false})
     }
 })
 
