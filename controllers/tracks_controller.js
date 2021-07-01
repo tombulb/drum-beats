@@ -38,6 +38,9 @@ router.post('/', (req, res) => {
         return;
       }
 
+      console.log(fields.title);
+      console.log(fields.genre);
+
       cloudinary
                 .uploader
                 .upload(files.track.path,{tags: 'metal', resource_type: 'video'})
