@@ -5,7 +5,8 @@ const loginContainer = document.querySelector('.log-in-container');
 const appContainer = document.querySelector('.app-container');
 const uploadForm = document.querySelector('.upload-form');
 const uploadInput = document.querySelector('.upload-input')
-
+const uploadGenreInput = document.querySelector('.genre-upload-input');
+const uploadTitleInput = document.querySelector('.title-upload-input');
 
 function handleLogin(e) {
     e.preventDefault();
@@ -68,6 +69,8 @@ function handleUpload(e) {
 
   var formData = new FormData();
   formData.append('track', file)
+  formData.append('title', uploadTitleInput.value)
+  formData.append('genre', uploadGenreInput.textContent)
 
   axios({
     method: "post",
