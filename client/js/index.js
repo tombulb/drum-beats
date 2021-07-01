@@ -3,7 +3,8 @@ const passwordInput = document.querySelector('.password-input');
 const loginForm = document.querySelector('.log-in-form');
 const loginContainer = document.querySelector('.log-in-container');
 const appContainer = document.querySelector('.app-container');
-
+const uploadForm = document.querySelector('.upload-form');
+const uploadInput = document.querySelector('.upload-input')
 
 // functions
 
@@ -25,7 +26,7 @@ function handleLoggedIn(e) {
     loginContainer.style.display = 'none';
     appContainer.style.display = 'grid';
 }
-
+handleLoggedIn()
 // event listeners
 
 loginForm.addEventListener('submit', handleLogin);
@@ -59,3 +60,35 @@ axios.get('/api/tracks').then(res => {
     document.querySelector('figure').appendChild(audioPlayer)
   })
 })
+
+
+function handleUpload(e) {
+  e.preventDefault()
+  debugger
+  var files = uploadInput.files;
+  var file = files[0];
+  var reqCon = "request sent"
+  var formData = new FormData();
+  
+  // formData.append('file', file);
+  formData.append('con', reqCon)
+  // debugger
+
+  axios({
+    method: "post",
+    url: "/api/tracks",
+    data: formData,
+    headers: { "Content-Type": "multipart/form-data" },
+  })
+    .then(function (response) {
+      //handle success
+      console.log('response');
+    })
+    .catch(function () {
+      //handle error
+      console.log('it didnt work');
+    });
+    // debugger
+}
+
+uploadForm.addEventListener('submit', handleUpload);
