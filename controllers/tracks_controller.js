@@ -38,9 +38,6 @@ router.post('/', (req, res) => {
         return;
       }
 
-      console.log(fields.title);
-      console.log(fields.genre);
-
       cloudinary
                 .uploader
                 .upload(files.track.path,{tags: 'metal', resource_type: 'video'})
@@ -49,8 +46,8 @@ router.post('/', (req, res) => {
 
                     sql = `INSERT INTO tracks 
                     (track_name, user_id, cloudinary_url, genres)
-                    VALUES ('test', 1, $1, 'metal')`
-                    db.query(sql, [track.url])
+                    VALUES ($1, 1, $2, $3)`
+                    db.query(sql, [fields.title, track.url, fields.genre])
                       .then(dbRes => {
                         console.log(dbRes)
                       })

@@ -70,7 +70,7 @@ function handleUpload(e) {
   var formData = new FormData();
   formData.append('track', file)
   formData.append('title', uploadTitleInput.value)
-  formData.append('genre', uploadGenreInput.textContent)
+  formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
 
   axios({
     method: "post",
