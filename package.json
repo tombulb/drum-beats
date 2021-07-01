@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cloudinary": "^1.26.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "formidable": "^1.2.2",
     "pg": "^8.6.0"
   },
   "devDependencies": {

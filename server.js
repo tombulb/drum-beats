@@ -10,6 +10,10 @@ const tracksController = require('./controllers/tracks_controller.js')
 const api_key = 414837986633473;
 // const sessionCheck = require('./middlewares/session_check.js');
 var session = require('express-session');
+// var formidable = require('formidable');
+// // var http = require('http');
+// // var util = require('util');
+​
 
 
 app.listen(port, () => {
@@ -34,3 +38,17 @@ app.use('/api/sessions', sessionsController)
 app.use('/api/tracks', tracksController);
 
 app.use(errorHandler);
+
+// app.post('/upload', (req, res, next) => {
+//   const form = formidable({ multiples: true });
+ 
+//   form.parse(req, (err, fields, files) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+//     console.log(files);
+//     res.json({ fields, files });
+//   });
+  
+// });
