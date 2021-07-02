@@ -15,6 +15,7 @@ const consoleSection = document.querySelector('.console-section')
 const updateBtn = document.querySelector('.update-btn')
 const userTracksSection = document.querySelector('.user-tracks-section')
 const deleteBtn = document.querySelector('.delete-btn')
+const filterBtn = document.querySelector('.filter-btn');
 
 function handleLogin(e) {
     e.preventDefault();
@@ -34,13 +35,14 @@ function handleLoggedIn(e) {
     loginContainer.style.display = 'none';
     appContainer.style.display = 'grid';
 }
+
 handleLoggedIn()
+
 // event listeners
 
 loginForm.addEventListener('submit', handleLogin);
 
 // axios requests on '/' static load
-
 
 axios.get('/api/sessions').then(res => {
     console.log(res.data)
@@ -88,6 +90,7 @@ function getTracks() {
             
             if (track.user_id === 1) {
               trackDiv.appendChild(optionBtn)
+              trackFigure.classList.add('user-track-figure')
               userTracksSection.appendChild(trackFigure)
               consoleSection.appendChild(userTracksSection)
             }
@@ -188,3 +191,4 @@ function handleOptions(e) {
 uploadForm.addEventListener('submit', handleUpload);
 editForm.addEventListener('submit', handleUpdate);
 deleteBtn.addEventListener('click', handleDelete)
+

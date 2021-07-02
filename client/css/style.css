@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+* {
+    color: rgb(66, 77, 67);
+    font-family: 'Work Sans', sans-serif;
+}
+
 body {
     height: 100vh;
 }
@@ -5,8 +12,8 @@ body {
 .app-container {
     display: none;
     height: 100%;
-    grid-template-rows: 2fr 15fr 1fr;
-    background-color: #cab6cd;
+    grid-template-rows: 1fr 15fr 1fr;
+    background-color: rgb(226, 243, 240);
 }
 
 .log-in-box {
@@ -23,8 +30,12 @@ body {
     background-color: mistyrose;
 }
 
-header, main, footer, .console-section, .feed-section {
+header, main, footer, .console-section, .feed-section, .player-section, .filter-section {
     border: 1px solid black;
+}
+
+main, header, footer {
+    padding: 20px 40px;
 }
 
 main {
@@ -32,12 +43,26 @@ main {
     grid-template-columns: 3fr 6fr;
     height: 100%;
     overflow: auto;
-    padding: 20px;
+}
+
+.player-section {
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    overflow: auto;
 }
 
 .feed-section {
     overflow: auto;    
     padding: 20px 50px;
+}
+
+.console-section {
+    overflow: auto;
+}
+
+.filter-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .track-div {
@@ -54,3 +79,35 @@ main {
   margin-right: 15px;
   cursor: pointer;
 }
+
+.filter-btn {
+    border: 3px solid rgb(173, 155, 170);
+    margin: 5px;
+    text-align: center;
+}
+
+.header-logo {
+    width: 40px;
+}
+
+.user-track-figure {
+    width: 80%;
+}
+
+.user-tracks-section {
+    height: 30%;
+    overflow: auto;
+}
+
+.user-track-figure figcaption {
+    font-size: 0.75em;
+}
+
+.user-track-figure audio {
+    height: 1em;
+    width: 100%;
+}
+
+
+
+/* palette https://coolors.co/627264-a1cda8-b5dfca-c5e7e2-ad9baa */
