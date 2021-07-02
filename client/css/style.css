@@ -5,7 +5,8 @@ body {
 .app-container {
     display: none;
     height: 100%;
-    grid-template-rows: 2fr 15fr 1fr
+    grid-template-rows: 2fr 15fr 1fr;
+    background-color: #cab6cd;
 }
 
 .log-in-box {
