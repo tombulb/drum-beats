@@ -16,58 +16,65 @@ CREATE TABLE users (
     password TEXT
 );
 
-INSERT INTO users (
-  user_name,
-  password
-  ) VALUES (
-    'test artist 1',
-    'pudding'
-    );
 
-INSERT INTO tracks (
-  track_name, 
-  user_id, 
-  cloudinary_url, 
-  genres
-  ) VALUES (
-    'terra incognita',
-    1,
-    'cloudinaryurl',
-    'rock'
-    );
 
-INSERT INTO tracks (
-  track_name, 
-  user_id, 
-  cloudinary_url, 
-  genres
-  ) VALUES (
-    'disembowelled with a soup spoon',
-    1,
-    'cloudinaryurl',
-    'metal'
-    );
+-- use seed.js to seed data, do not use examples below.
 
-INSERT INTO tracks (
-  track_name, 
-  user_id, 
-  cloudinary_url, 
-  genres
-  ) VALUES (
-    'paft dunk',
-    2,
-    'cloudinaryurl',
-    'house'
-    );
 
-INSERT INTO tracks (
-  track_name, 
-  user_id, 
-  cloudinary_url, 
-  genres
-  ) VALUES (
-    'massive effect',
-    3,
-    'cloudinaryurl',
-    'drum n bass'
-    );
+
+
+-- INSERT INTO users (
+--   user_name,
+--   password
+--   ) VALUES (
+--     'test artist 1',
+--     'pudding'
+--     );
+
+-- INSERT INTO tracks (
+--   track_name, 
+--   user_id, 
+--   cloudinary_url, 
+--   genres
+--   ) VALUES (
+--     'terra incognita',
+--     1,
+--     'cloudinaryurl',
+--     'rock'
+--     );
+
+-- INSERT INTO tracks (
+--   track_name, 
+--   user_id, 
+--   cloudinary_url, 
+--   genres
+--   ) VALUES (
+--     'disembowelled with a soup spoon',
+--     1,
+--     'cloudinaryurl',
+--     'metal'
+--     );
+
+-- INSERT INTO tracks (
+--   track_name, 
+--   user_id, 
+--   cloudinary_url, 
+--   genres
+--   ) VALUES (
+--     'paft dunk',
+--     2,
+--     'cloudinaryurl',
+--     'house'
+--     );
+
+-- INSERT INTO tracks (
+--   track_name, 
+--   user_id, 
+--   cloudinary_url, 
+--   genres
+--   ) VALUES (
+--     'massive effect',
+--     3,
+--     'cloudinaryurl',
+--     'drum n bass'
+--     );
