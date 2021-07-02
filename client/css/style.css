@@ -81,13 +81,32 @@ main {
 }
 
 .filter-btn {
-    border: 3px solid 
+    border: 3px solid rgb(173, 155, 170);
+    margin: 5px;
+    text-align: center;
 }
 
 .header-logo {
     width: 40px;
 }
 
+.user-track-figure {
+    width: 80%;
+}
+
+.user-tracks-section {
+    height: 30%;
+    overflow: auto;
+}
+
+.user-track-figure figcaption {
+    font-size: 0.75em;
+}
+
+.user-track-figure audio {
+    height: 1em;
+    width: 100%;
+}
 
 
 
