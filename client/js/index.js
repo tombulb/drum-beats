@@ -1,8 +1,8 @@
-const usernameInput = document.querySelector('.username-input');
-const passwordInput = document.querySelector('.password-input');
-const loginForm = document.querySelector('.log-in-form');
-const loginContainer = document.querySelector('.log-in-container');
-const appContainer = document.querySelector('.app-container');
+const usernameInput = document.querySelector('.username-input')
+const passwordInput = document.querySelector('.password-input')
+const loginForm = document.querySelector('.log-in-form')
+const loginContainer = document.querySelector('.log-in-container')
+const appContainer = document.querySelector('.app-container')
 const uploadForm = document.querySelector('.upload-form');
 const uploadInput = document.querySelector('.upload-input')
 const uploadGenreInput = document.querySelector('.genre-upload-input');
@@ -11,6 +11,10 @@ const feedSection = document.querySelector('.feed-section');
 const editForm = document.querySelector('.edit-form');
 const editTitleInput = document.querySelector('.title-edit-input')
 const editGenreInput = document.querySelector('.genre-edit-input')
+const consoleSection = document.querySelector('.console-section')
+const updateBtn = document.querySelector('.update-btn')
+const userTracksSection = document.querySelector('.user-tracks-section')
+const deleteBtn = document.querySelector('.delete-btn')
 
 function handleLogin(e) {
     e.preventDefault();
@@ -45,8 +49,10 @@ axios.get('/api/sessions').then(res => {
     }
 })
 
-function clearTracks() {
+function refreshTracks() {
     feedSection.innerHTML = '';
+    userTracksSection.innerHTML = '';
+    getTracks()
 
 }
 
@@ -55,20 +61,40 @@ function getTracks() {
         console.log(res.data)
         let dbTracks = res.data
   
-        dbTracks.forEach(track => {
-            const trackDisplay = document.createElement('figure')
-
+        dbTracks.forEach((track) => {
+            const trackFigure = document.createElement('figure')
             const trackTitle = document.createElement('figcaption')
             trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
-
+            const trackDiv = document.createElement('div')
+            trackDiv.setAttribute('class', 'track-div')
+            // Create Option Button
+            const optionBtn = document.createElement('img')
+            optionBtn.setAttribute('src', 'images/gear-button.png')
+            optionBtn.setAttribute('class', `option-btn ${track.id}`)
+              // Create Audio Player
             const audioPlayer = document.createElement('audio')
+            audioPlayer.classList.add('audio-player')
             audioPlayer.setAttribute('controls', 'true')
+            audioPlayer.setAttribute('controlsList', 'nodownload')
             audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+            
 
-            trackDisplay.appendChild(trackTitle);
-            trackDisplay.appendChild(audioPlayer);
-            document.querySelector('.feed-section').appendChild(trackDisplay)
-        })
+            
+            
+            trackFigure.appendChild(trackTitle);
+            trackFigure.appendChild(trackDiv);
+            trackDiv.appendChild(audioPlayer)
+            feedSection.appendChild(trackFigure)
+            
+            if (track.user_id === 1) {
+              trackDiv.appendChild(optionBtn)
+              userTracksSection.appendChild(trackFigure)
+              consoleSection.appendChild(userTracksSection)
+            }
+
+            optionBtn.addEventListener('click', handleOptions)
+
+          })
     })
 }
 
@@ -93,8 +119,7 @@ function handleUpload(e) {
     .then(response => {
       console.log(response.data.upload)  
       if (response.data.upload) {
-        clearTracks();  
-        getTracks();
+        refreshTracks();  
       }
     })
     .catch(err => {
@@ -104,6 +129,7 @@ function handleUpload(e) {
 
 function handleUpdate(e) {
   e.preventDefault()
+  
 
   let updatedTrackInfo = {
     trackName: editTitleInput.value,
@@ -112,13 +138,12 @@ function handleUpdate(e) {
 
   axios({
     method: "put",
-    url: "/api/tracks",
+    url: `/api/tracks/${updateBtn.id}`,
     data: updatedTrackInfo
   })
   .then(response => {
     if (response.data.updated) {
-      clearTracks();
-      getTracks();
+      refreshTracks();
     }
   })
   .catch(err => {
@@ -126,7 +151,40 @@ function handleUpdate(e) {
   })
 }
 
+function handleDelete(e) {
+  e.preventDefault()
+
+  axios.delete(`/api/tracks/${deleteBtn.id}`)
+  .then(response => {
+    if (response.data.deleted) {
+      console.log("deleted");
+      refreshTracks();
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
+}
+
+function handleOptions(e) {
+  e.preventDefault()
+  trackID = e.target.classList[1]
+  updateBtn.setAttribute('id', e.target.classList[1])
+  deleteBtn.setAttribute('id', e.target.classList[1])
+
+  axios({
+    method: "get",
+    url: `/api/tracks/${e.target.classList[1]}`,
+  })
+  .then(response => {
+    console.log(response);
+    editTitleInput.value = response.data[0].track_name
+    editGenreInput.selectedOptions[0].textContent = response.data[0].genres
+  })
+}
 
 
 uploadForm.addEventListener('submit', handleUpload);
 editForm.addEventListener('submit', handleUpdate);
+deleteBtn.addEventListener('click', handleDelete)

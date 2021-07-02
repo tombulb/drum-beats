@@ -10,7 +10,8 @@ const db = new Pool({
   password: process.env.PG_PASSWORD
 })
 
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary').v2;
+const { createSecretKey } = require('crypto');
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -26,51 +27,73 @@ router.get('/', (req, res) => {
     .then(dbRes => {
       res.json(dbRes.rows)
     })
+  })
+  
+  router.post('/', (req, res) => {
+    console.log("a file has been sent");
+    const form = formidable({ multiples: true });
+  
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+          next(err);
+          return;
+        }
+  
+        cloudinary
+                  .uploader
+                  .upload(files.track.path,{tags: 'metal', resource_type: 'video'})
+                  .then(track => {
+                      console.log("Uploaded on Cloudinary at " + track.url);
+  
+                      sql = `INSERT INTO tracks 
+                      (track_name, user_id, cloudinary_url, genres)
+                      VALUES ($1, 1, $2, $3)`
+                      db.query(sql, [fields.title, track.url, fields.genre])
+                        .then(dbRes => {
+                          console.log(dbRes)
+                          res.json({upload: true})
+                        })
+                  })
+                  .catch(err => {
+                    console.log();
+                    console.log("** File Upload (Promise)");
+                    if (err) { console.warn(err); }
+                  });
+  
+        return files;
+    });
+  })
+
+router.delete('/:id', (req, res) => {
+  db.query(`DELETE FROM tracks WHERE ID = ${req.params.id};`)
+  .then(dbRes => {
+    res.json({deleted: true})
+  })
 })
 
-router.put('/', (req, res) => {
-  let sql = `UPDATE tracks SET track_name = $1, genres = $2 WHERE id=13;`
+router.put('/:id', (req, res) => {
+  let sql = `UPDATE tracks SET track_name = $1, genres = $2 WHERE id=$3;`
   db
-    .query(sql, [req.body.trackName, req.body.trackGenre])
+  .query(sql, [req.body.trackName, req.body.trackGenre, req.params.id])
+  .then(dbRes => {
+    res.json({updated: true})
+  })
+})
+
+router.get('/:id', (req, res) => {
+  db.query(`SELECT * FROM tracks WHERE ID = ${req.params.id};`)
     .then(dbRes => {
-      res.json({updated: true})
+      res.json(dbRes.rows)
     })
 })
 
 
-router.post('/', (req, res) => {
-  console.log("a file has been sent");
-  const form = formidable({ multiples: true });
 
-  form.parse(req, (err, fields, files) => {
-      if (err) {
-        next(err);
-        return;
-      }
 
-      cloudinary
-                .uploader
-                .upload(files.track.path,{tags: 'metal', resource_type: 'video'})
-                .then(track => {
-                    console.log("Uploaded on Cloudinary at " + track.url);
 
-                    sql = `INSERT INTO tracks 
-                    (track_name, user_id, cloudinary_url, genres)
-                    VALUES ($1, 1, $2, $3)`
-                    db.query(sql, [fields.title, track.url, fields.genre])
-                      .then(dbRes => {
-                        console.log(dbRes)
-                        res.json({upload: true})
-                      })
-                })
-                .catch(err => {
-                  console.log();
-                  console.log("** File Upload (Promise)");
-                  if (err) { console.warn(err); }
-                });
-
-      return files;
-  });
-})
 
 module.exports = router
+
+
+
+// db.query(`SELECT * FROM tracks WHERE ID = ${e.target.classList[1]};`)
