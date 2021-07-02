@@ -23,7 +23,7 @@ cloudinary.config({
 db.connect()
 
 router.get('/', (req, res) => {
-  db.query('select * from tracks;').then(dbRes => {
+  db.query('select * from tracks order by id DESC;').then(dbRes => {
     res.json(dbRes.rows)
   })
 })
@@ -50,6 +50,7 @@ router.post('/', (req, res) => {
                     db.query(sql, [fields.title, track.url, fields.genre])
                       .then(dbRes => {
                         console.log(dbRes)
+                        res.json({message: 'successful upload'})
                       })
                 })
                 .catch(err => {
