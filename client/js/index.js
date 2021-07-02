@@ -55,9 +55,9 @@ axios.get('/api/tracks').then(res => {
     audioPlayer.setAttribute('controls', 'true')
     audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
 
+    trackDisplay.appendChild(trackTitle);
+    trackDisplay.appendChild(audioPlayer);
     document.querySelector('.feed-section').appendChild(trackDisplay)
-    document.querySelector('figure').appendChild(trackTitle)
-    document.querySelector('figure').appendChild(audioPlayer)
   })
 })
 
