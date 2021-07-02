@@ -78,19 +78,11 @@ function handleUpload(e) {
   e.preventDefault()
   var files = uploadInput.files;
   var file = files[0];
-<<<<<<< HEAD
 
   var formData = new FormData();
   formData.append('track', file)
   formData.append('title', uploadTitleInput.value)
   formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
-=======
-  var formData = new FormData();
-  
-  // formData.append('file', file);
-  formData.append('file', file)
-  // debugger
->>>>>>> desk cleared
 
   axios({
     method: "post",
@@ -105,14 +97,8 @@ function handleUpload(e) {
         getTracks();
       }
     })
-<<<<<<< HEAD
     .catch(err => {
       console.log(err);
-=======
-    .catch(function (response) {
-      //handle error
-      console.log(response);
->>>>>>> desk cleared
     });
 }
 

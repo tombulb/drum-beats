@@ -7,7 +7,7 @@ var util = require('util');
 const {Pool} = require('pg')
 const db = new Pool({
   database: 'drum_beats',
-  password: ' ',
+  password: process.env.PG_PASSWORD
 })
 
 const cloudinary = require('cloudinary').v2
@@ -40,7 +40,6 @@ router.put('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log("a file has been sent");
-<<<<<<< HEAD
   const form = formidable({ multiples: true });
 
   form.parse(req, (err, fields, files) => {
@@ -54,10 +53,6 @@ router.post('/', (req, res) => {
                 .upload(files.track.path,{tags: 'metal', resource_type: 'video'})
                 .then(track => {
                     console.log("Uploaded on Cloudinary at " + track.url);
-=======
-
-  
->>>>>>> desk cleared
 
                     sql = `INSERT INTO tracks 
                     (track_name, user_id, cloudinary_url, genres)
