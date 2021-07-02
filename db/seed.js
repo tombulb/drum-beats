@@ -3,7 +3,7 @@
 const {Pool} = require('pg')
 const db = new Pool({
   database: 'drum_beats',
-  password: ' ',
+  password: process.env.PG_PASSWORD
 })
 
 const userIds = [1,2,3,4,5,6,7,8,9,10]
