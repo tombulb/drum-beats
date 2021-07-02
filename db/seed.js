@@ -1,4 +1,4 @@
-// create a seed file that the programmer can run to set up database with table from schema.sql and user data.
+// create a seed file that the programmer can run to set up database with data. Recommend 'drop table [table-name] cascade;' before adding data.
 
 const {Pool} = require('pg')
 const db = new Pool({
