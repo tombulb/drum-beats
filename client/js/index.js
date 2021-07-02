@@ -15,7 +15,7 @@ const consoleSection = document.querySelector('.console-section')
 const updateBtn = document.querySelector('.update-btn')
 const userTracksSection = document.querySelector('.user-tracks-section')
 const deleteBtn = document.querySelector('.delete-btn')
-const filterBtn = document.querySelector('.filter-btn');
+const filterBtns = document.querySelectorAll('.filter-btn');
 
 function handleLogin(e) {
     e.preventDefault();
@@ -51,54 +51,77 @@ axios.get('/api/sessions').then(res => {
     }
 })
 
-function refreshTracks() {
-    feedSection.innerHTML = '';
-    userTracksSection.innerHTML = '';
-    getTracks()
-
-}
-
 function getTracks() {
     axios.get('/api/tracks').then(res => {
         console.log(res.data)
         let dbTracks = res.data
-  
-        dbTracks.forEach((track) => {
-            const trackFigure = document.createElement('figure')
-            const trackTitle = document.createElement('figcaption')
-            trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
-            const trackDiv = document.createElement('div')
-            trackDiv.setAttribute('class', 'track-div')
-            // Create Option Button
-            const optionBtn = document.createElement('img')
-            optionBtn.setAttribute('src', 'images/gear-button.png')
-            optionBtn.setAttribute('class', `option-btn ${track.id}`)
-              // Create Audio Player
-            const audioPlayer = document.createElement('audio')
-            audioPlayer.classList.add('audio-player')
-            audioPlayer.setAttribute('controls', 'true')
-            audioPlayer.setAttribute('controlsList', 'nodownload')
-            audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
-            
 
-            
-            
-            trackFigure.appendChild(trackTitle);
-            trackFigure.appendChild(trackDiv);
-            trackDiv.appendChild(audioPlayer)
-            feedSection.appendChild(trackFigure)
-            
-            if (track.user_id === 1) {
-              trackDiv.appendChild(optionBtn)
-              trackFigure.classList.add('user-track-figure')
-              userTracksSection.appendChild(trackFigure)
-              consoleSection.appendChild(userTracksSection)
-            }
+        let includeUserTracks = true;
 
-            optionBtn.addEventListener('click', handleOptions)
-
-          })
+        getSQLTracks(dbTracks, includeUserTracks)
     })
+}
+
+
+function refreshTracks() {
+    feedSection.innerHTML = '';
+    userTracksSection.innerHTML = '';
+    getTracks()
+}
+
+function getGenreTracks(e) {
+  let genre = e.target.classList[1];
+  let includeUserTracks = false;
+  if (genre == 'all') {
+    getTracks();
+  } else {
+    axios
+        .get(`/api/tracks/genre/${genre}`)
+        .then(res => {
+            console.log(res.data)
+            let dbTracks = res.data
+            getSQLTracks(dbTracks, includeUserTracks);
+      })
+  }
+}
+
+
+function getSQLTracks(dbTracks, includeUserTracks) {
+  dbTracks.forEach((track) => {
+    const trackFigure = document.createElement('figure')
+    const trackTitle = document.createElement('figcaption')
+    trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
+    const trackDiv = document.createElement('div')
+    trackDiv.setAttribute('class', 'track-div')
+
+    const audioPlayer = document.createElement('audio')
+    audioPlayer.classList.add('audio-player')
+    audioPlayer.setAttribute('controls', 'true')
+    audioPlayer.setAttribute('controlsList', 'nodownload')
+    audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+    
+    trackFigure.appendChild(trackTitle);
+    trackFigure.appendChild(trackDiv);
+    trackDiv.appendChild(audioPlayer);
+    feedSection.appendChild(trackFigure);
+
+    if (track.user_id === 1 && includeUserTracks) {
+      const optionBtn = document.createElement('img')
+      optionBtn.setAttribute('src', 'images/gear-button.png')
+      optionBtn.setAttribute('class', `option-btn ${track.id}`)
+      optionBtn.addEventListener('click', handleOptions)
+
+      trackDiv.appendChild(optionBtn)
+      trackFigure.classList.add('user-track-figure')
+      userTracksSection.appendChild(trackFigure)
+      consoleSection.appendChild(userTracksSection)
+    }
+})
+}
+
+function refreshGenreTracks(e) {
+    feedSection.innerHTML = '';
+    getGenreTracks(e);
 }
 
 getTracks();
@@ -133,7 +156,6 @@ function handleUpload(e) {
 function handleUpdate(e) {
   e.preventDefault()
   
-
   let updatedTrackInfo = {
     trackName: editTitleInput.value,
     trackGenre: editGenreInput.selectedOptions[0].textContent
@@ -162,6 +184,8 @@ function handleDelete(e) {
     if (response.data.deleted) {
       console.log("deleted");
       refreshTracks();
+      editTitleInput.value = ''
+      editGenreInput.selectedOptions[0].textContent = ''
     }
   })
   .catch(err => {
@@ -190,5 +214,8 @@ function handleOptions(e) {
 
 uploadForm.addEventListener('submit', handleUpload);
 editForm.addEventListener('submit', handleUpdate);
-deleteBtn.addEventListener('click', handleDelete)
+deleteBtn.addEventListener('click', handleDelete);
 
+filterBtns.forEach(filterBtn => {
+  filterBtn.addEventListener('click', refreshGenreTracks)
+})
