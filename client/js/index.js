@@ -8,6 +8,9 @@ const uploadInput = document.querySelector('.upload-input')
 const uploadGenreInput = document.querySelector('.genre-upload-input');
 const uploadTitleInput = document.querySelector('.title-upload-input');
 const feedSection = document.querySelector('.feed-section');
+const editForm = document.querySelector('.edit-form');
+const editTitleInput = document.querySelector('.title-edit-input')
+const editGenreInput = document.querySelector('.genre-edit-input')
 
 function handleLogin(e) {
     e.preventDefault();
@@ -99,4 +102,31 @@ function handleUpload(e) {
     });
 }
 
+function handleUpdate(e) {
+  e.preventDefault()
+
+  let updatedTrackInfo = {
+    trackName: editTitleInput.value,
+    trackGenre: editGenreInput.selectedOptions[0].textContent
+  }
+
+  axios({
+    method: "put",
+    url: "/api/tracks",
+    data: updatedTrackInfo
+  })
+  .then(response => {
+    if (response.data.updated) {
+      clearTracks();
+      getTracks();
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+
+
 uploadForm.addEventListener('submit', handleUpload);
+editForm.addEventListener('submit', handleUpdate);

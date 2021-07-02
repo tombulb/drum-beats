@@ -23,10 +23,21 @@ cloudinary.config({
 db.connect()
 
 router.get('/', (req, res) => {
-  db.query('select * from tracks order by id DESC;').then(dbRes => {
-    res.json(dbRes.rows)
-  })
+  db.query('select * from tracks order by id DESC;')
+    .then(dbRes => {
+      res.json(dbRes.rows)
+    })
 })
+
+router.put('/', (req, res) => {
+  let sql = `UPDATE tracks SET track_name = $1, genres = $2 WHERE id=13;`
+  db
+    .query(sql, [req.body.trackName, req.body.trackGenre])
+    .then(dbRes => {
+      res.json({updated: true})
+    })
+})
+
 
 router.post('/', (req, res) => {
   console.log("a file has been sent");
