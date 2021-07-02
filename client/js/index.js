@@ -41,7 +41,8 @@ axios.get('/api/sessions').then(res => {
     }
 })
 
-axios.get('/api/tracks').then(res => {
+function getTracks() {
+    axios.get('/api/tracks').then(res => {
   
   let dbTracks = res.data
   
@@ -60,7 +61,9 @@ axios.get('/api/tracks').then(res => {
     document.querySelector('.feed-section').appendChild(trackDisplay)
   })
 })
+}
 
+getTracks();
 
 function handleUpload(e) {
   e.preventDefault()
@@ -79,7 +82,9 @@ function handleUpload(e) {
     headers: { "Content-Type": "multipart/form-data" },
   })
     .then(response => {
-      console.log('response');
+      if (response.data.message === 'successful upload') {
+          getTracks();
+      }
     })
     .catch(err => {
       console.log(err);

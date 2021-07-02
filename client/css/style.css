@@ -34,6 +34,5 @@ main {
 }
 
 .feed-section {
-
-    
+    overflow: auto;    
 }
