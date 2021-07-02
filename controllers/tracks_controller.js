@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
                     db.query(sql, [fields.title, track.url, fields.genre])
                       .then(dbRes => {
                         console.log(dbRes)
-                        res.json({message: 'successful upload'})
+                        res.json({upload: true})
                       })
                 })
                 .catch(err => {

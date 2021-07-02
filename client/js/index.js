@@ -7,6 +7,7 @@ const uploadForm = document.querySelector('.upload-form');
 const uploadInput = document.querySelector('.upload-input')
 const uploadGenreInput = document.querySelector('.genre-upload-input');
 const uploadTitleInput = document.querySelector('.title-upload-input');
+const feedSection = document.querySelector('.feed-section');
 
 function handleLogin(e) {
     e.preventDefault();
@@ -41,26 +42,31 @@ axios.get('/api/sessions').then(res => {
     }
 })
 
+function clearTracks() {
+    feedSection.innerHTML = '';
+
+}
+
 function getTracks() {
     axios.get('/api/tracks').then(res => {
+        console.log(res.data)
+        let dbTracks = res.data
   
-  let dbTracks = res.data
-  
-  dbTracks.forEach(track => {
-    const trackDisplay = document.createElement('figure')
+        dbTracks.forEach(track => {
+            const trackDisplay = document.createElement('figure')
 
-    const trackTitle = document.createElement('figcaption')
-    trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
+            const trackTitle = document.createElement('figcaption')
+            trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
 
-    const audioPlayer = document.createElement('audio')
-    audioPlayer.setAttribute('controls', 'true')
-    audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+            const audioPlayer = document.createElement('audio')
+            audioPlayer.setAttribute('controls', 'true')
+            audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
 
-    trackDisplay.appendChild(trackTitle);
-    trackDisplay.appendChild(audioPlayer);
-    document.querySelector('.feed-section').appendChild(trackDisplay)
-  })
-})
+            trackDisplay.appendChild(trackTitle);
+            trackDisplay.appendChild(audioPlayer);
+            document.querySelector('.feed-section').appendChild(trackDisplay)
+        })
+    })
 }
 
 getTracks();
@@ -82,8 +88,10 @@ function handleUpload(e) {
     headers: { "Content-Type": "multipart/form-data" },
   })
     .then(response => {
-      if (response.data.message === 'successful upload') {
-          getTracks();
+      console.log(response.data.upload)  
+      if (response.data.upload) {
+        clearTracks();  
+        getTracks();
       }
     })
     .catch(err => {
