@@ -41,6 +41,10 @@ const genres = [
     {
         genre: 'Reggae',
         url: 'https://res.cloudinary.com/dgpuwpmjk/video/upload/v1625195296/reggae_nny7hg.wav'
+    },
+    {
+        genre: 'Prog Rock',
+        url: 'https://res.cloudinary.com/dgpuwpmjk/video/upload/v1625195300/rock_kquiwc.wav'
     }
 ]
 
@@ -53,8 +57,8 @@ for (let i = 0; i < 100; i++) {
     let sql = `INSERT INTO tracks 
             (track_name, user_id, cloudinary_url, genres)
              VALUES ($1, $2, $3, $4)`
-    let userId = Math.floor(Math.random() * 11)
-    let genreIndex = Math.floor(Math.random() * 8)
-    let trackSnippetIndex = Math.floor(Math.random() * 10)
+    let userId = Math.floor(Math.random() * userIds.length)
+    let genreIndex = Math.floor(Math.random() * genres.length)
+    let trackSnippetIndex = Math.floor(Math.random() * trackSnippets.length)
     db.query(sql, [`${genres[genreIndex].genre} ${trackSnippets[trackSnippetIndex]}`, userId, genres[genreIndex].url, genres[genreIndex].genre])
 }

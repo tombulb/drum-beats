@@ -26,16 +26,22 @@
         </header>
         <main>
             <div class="console-section">
-
                 <h2>Create form</h2>  
                 <form class="upload-form" action="" enctype="multipart/form-data">
                     <input name="title" type="text" class="title-upload-input" placeholder="Track Title">
                     <select name="genre" class="genre-upload-input">
+                        <option value="" disabled>Select a Genre</option>
+                        <option value="">Dubstep</option>
+                        <option value="">Country</option>
+                        <option value="">Blues</option>
+                        <option value="">Heavy Metal</option>
+                        <option value="">Jazz</option>
                         <option value="">Rock</option>
-                        <option value="">Drum n Bass</option>
-                        <option value="'">Heavy Metal</option>
+                        <option value="">Disco</option>
+                        <option value="">Reggae</option>
+                        <option value="">Prog Rock</option>
                     </select>
-                    <input class="upload-input" name="upload-input" type="file">
+                    <input class="upload-input" name="upload-input" type="file" accept=".wav,.mp3,.m4a,.flac,.aac,.aiff,.ogg,.amr,.opus">
                     <button>upload</button>
                 </form>
 
@@ -43,9 +49,16 @@
                 <form class="edit-form" action="">
                     <input name="title" type="text" class="title-edit-input">
                     <select name="genre" class="genre-edit-input">
+                        <option value=""></option>
+                        <option value="">Dubstep</option>
+                        <option value="">Country</option>
+                        <option value="">Blues</option>
+                        <option value="">Heavy Metal</option>
+                        <option value="">Jazz</option>
                         <option value="">Rock</option>
-                        <option value="">Drum n Bass</option>
-                        <option value="'">Heavy Metal</option>
+                        <option value="">Disco</option>
+                        <option value="">Reggae</option>
+                        <option value="">Prog Rock</option>
                     </select>
                     <button class="update-btn">update</button>
                   </form>
@@ -63,6 +76,7 @@
                 <div class="filter-btn rock">Rock</div>
                 <div class="filter-btn disco">Disco</div>
                 <div class="filter-btn reggae">Reggae</div>
+                <div class="filter-btn prog-rock">Prog Rock</div>
               </div>
               <div class="feed-section"></div>
             </div>
