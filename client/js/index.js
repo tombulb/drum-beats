@@ -39,7 +39,7 @@ function handleLoggedIn(e) {
     appContainer.style.display = 'grid';
 }
 
-handleLoggedIn()
+// handleLoggedIn()
 
 
 
@@ -112,7 +112,7 @@ function getSQLTracks(dbTracks, includeUserTracks) {
       const trackTitle = document.createElement('figcaption')
       trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
       const trackDiv = document.createElement('div')
-      trackDiv.setAttribute('class', 'track-div')
+      trackDiv.setAttribute('class', 'track-div user-track-div')
 
       const audioPlayer = document.createElement('audio')
       audioPlayer.classList.add('audio-player')
@@ -278,10 +278,6 @@ function closeEditForm() {
 
 // FUNCTION TO DISPLAY/HIDE UPLOAD FORM - ALSO!! ADD CLASS="HIDDEN" TO <form class="upload-form" action="" enctype="multipart/form-data"> IN INDEX.HTML
 
-// function handleOpenUpload () {
-//   console.log('hello testing')
-//   uploadForm.classList.toggle('hidden');
-// }
 
 // event listeners
 
@@ -300,3 +296,5 @@ closeUploadBtn.addEventListener('click', closeUploadForm)
 
 // option button event listener to open menu is in getSQLtracks function, where we create the user tracks.
 closeEditBtn.addEventListener('click', closeEditForm)
+
+// document.body.addEventListener('play', )

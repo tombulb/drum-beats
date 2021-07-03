@@ -22,12 +22,29 @@ body {
     flex-direction: column;
 }
 
+.log-in-box input, .log-in-box button {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 5px 20px;
+
+}
+
+.log-in-button:hover {
+    cursor: pointer;
+}
+
 .log-in-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-content: center;
-    background-color: mistyrose;
+    background-color: grey;
+}
+
+.splash-title {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 header, main, footer, .console-section, .feed-section, .player-section, .filter-section {
@@ -71,6 +88,8 @@ main {
   align-items: center;
   
 }
+
+
 
 .feed-section figure {
     border: 2px solid black;
@@ -127,8 +146,15 @@ main {
     width: 40px;
 }
 
+.splash-logo {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
 .user-track-figure {
-    width: 80%;
+
 }
 
 .user-tracks-section {
@@ -146,6 +172,10 @@ main {
     width: 100%;
 }
 
+.user-track-div {
+    height: 1.5em;
+}
+
 .preloader {
     width: 64px;
 }
@@ -153,8 +183,8 @@ main {
 .open-upload-btn {
     border: 3px solid grey;
     border-radius: 4px;
-    margin-left: 109px;
-    margin-right: 109px;
+    width: 40%;
+    margin: 0 auto;
     text-align: center;
 }
 
