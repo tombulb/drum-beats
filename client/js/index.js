@@ -87,7 +87,7 @@ function getGenreTracks(e) {
 
 function getSQLTracks(dbTracks, includeUserTracks) {
   dbTracks.forEach((track) => {
-    const trackFigure = document.createElement('figure')
+    const trackFig = document.createElement('figure')
     const trackTitle = document.createElement('figcaption')
     trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
     const trackDiv = document.createElement('div')
@@ -99,23 +99,42 @@ function getSQLTracks(dbTracks, includeUserTracks) {
     audioPlayer.setAttribute('controlsList', 'nodownload')
     audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
     
-    trackFigure.appendChild(trackTitle);
-    trackFigure.appendChild(trackDiv);
+    trackFig.appendChild(trackTitle);
+    trackFig.appendChild(trackDiv);
     trackDiv.appendChild(audioPlayer);
-    feedSection.appendChild(trackFigure);
+    feedSection.appendChild(trackFig);
 
     if (track.user_id === 1 && includeUserTracks) {
+
+      const trackConsoleFig = document.createElement('figure')
+      const trackTitle = document.createElement('figcaption')
+      trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
+      const trackDiv = document.createElement('div')
+      trackDiv.setAttribute('class', 'track-div')
+
+      const audioPlayer = document.createElement('audio')
+      audioPlayer.classList.add('audio-player')
+      audioPlayer.setAttribute('controls', 'true')
+      audioPlayer.setAttribute('controlsList', 'nodownload')
+      audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+      
+      trackConsoleFig.appendChild(trackTitle);
+      trackConsoleFig.appendChild(trackDiv);
+      trackDiv.appendChild(audioPlayer);
+
+
+
       const optionBtn = document.createElement('img')
       optionBtn.setAttribute('src', 'images/gear-button.png')
       optionBtn.setAttribute('class', `option-btn ${track.id}`)
       optionBtn.addEventListener('click', handleOptions)
 
       trackDiv.appendChild(optionBtn)
-      trackFigure.classList.add('user-track-figure')
-      userTracksSection.appendChild(trackFigure)
+      trackConsoleFig.classList.add('user-track-figure')
+      userTracksSection.appendChild(trackConsoleFig)
       consoleSection.appendChild(userTracksSection)
     }
-})
+  })
 }
 
 function refreshGenreTracks(e) {
