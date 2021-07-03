@@ -1,22 +1,24 @@
-const usernameInput = document.querySelector('.username-input')
-const passwordInput = document.querySelector('.password-input')
-const loginForm = document.querySelector('.log-in-form')
-const loginContainer = document.querySelector('.log-in-container')
-const appContainer = document.querySelector('.app-container')
+const usernameInput = document.querySelector('.username-input');
+const passwordInput = document.querySelector('.password-input');
+const loginForm = document.querySelector('.log-in-form');
+const loginContainer = document.querySelector('.log-in-container');
+const appContainer = document.querySelector('.app-container');
 const uploadForm = document.querySelector('.upload-form');
-const uploadInput = document.querySelector('.upload-input')
+const uploadInput = document.querySelector('.upload-input');
 const uploadGenreInput = document.querySelector('.genre-upload-input');
 const uploadTitleInput = document.querySelector('.title-upload-input');
 const feedSection = document.querySelector('.feed-section');
 const editForm = document.querySelector('.edit-form');
-const editTitleInput = document.querySelector('.title-edit-input')
-const editGenreInput = document.querySelector('.genre-edit-input')
-const consoleSection = document.querySelector('.console-section')
-const updateBtn = document.querySelector('.update-btn')
-const userTracksSection = document.querySelector('.user-tracks-section')
-const deleteBtn = document.querySelector('.delete-btn')
+const editTitleInput = document.querySelector('.title-edit-input');
+const editGenreInput = document.querySelector('.genre-edit-input');
+const consoleSection = document.querySelector('.console-section');
+const updateBtn = document.querySelector('.update-btn');
+const userTracksSection = document.querySelector('.user-tracks-section');
+const deleteBtn = document.querySelector('.delete-btn');
 const filterBtns = document.querySelectorAll('.filter-btn');
-const openUplooadBtn = document.querySelector('.open-upload-btn');
+const openUploadBtn = document.querySelector('.open-upload-btn');
+const closeUploadBtn = document.querySelector('.close-upload-btn');
+const closeEditBtn = document.querySelector('.close-edit-btn')
 
 function handleLogin(e) {
     e.preventDefault();
@@ -185,13 +187,14 @@ function handleUpload(e) {
     });
 }
 
-function handleUpdate(e) {
+function handleEdit(e) {
   e.preventDefault()
   
   let updatedTrackInfo = {
     trackName: editTitleInput.value,
     trackGenre: editGenreInput.selectedOptions[0].textContent
   }
+  console.log(updatedTrackInfo);
 
   axios({
     method: "put",
@@ -228,6 +231,7 @@ function handleDelete(e) {
 
 function handleOptions(e) {
   e.preventDefault()
+  openEditForm()
   trackID = e.target.classList[1]
   updateBtn.setAttribute('id', e.target.classList[1])
   deleteBtn.setAttribute('id', e.target.classList[1])
@@ -240,26 +244,55 @@ function handleOptions(e) {
     console.log(response);
     editTitleInput.value = response.data[0].track_name
     editGenreInput.selectedOptions[0].textContent = response.data[0].genres
-    editForm.classList.toggle('hidden');
+    // editForm.classList.toggle('hidden');
   })
 
 }
 
-function handleOpenUpload () {
-  console.log('hello testing')
-  uploadForm.classList.toggle('hidden');
+function openUploadForm() {
+  closeEditForm()
+  document.querySelector('.upload-menu').style.marginLeft = '0';
+  document.querySelector('.app-container').style.marginLeft = '250px';
+  document.body.style.backgroundColor = 'rgba(0,0,0,0.4)';
 }
+
+function closeUploadForm() {
+  document.querySelector('.upload-menu').style.marginLeft = '-250px';
+  document.querySelector('.app-container').style.marginLeft = '0';
+  document.body.style.backgroundColor = '#fff';
+}
+
+function openEditForm() {
+  closeUploadForm()
+  document.querySelector('.edit-menu').style.marginLeft = '0';
+  document.querySelector('.app-container').style.marginLeft = '250px';
+  document.body.style.backgroundColor = 'rgba(0,0,0,0.4)';
+}
+
+function closeEditForm() {
+  document.querySelector('.edit-menu').style.marginLeft = '-250px';
+  document.querySelector('.app-container').style.marginLeft = '0';
+  document.body.style.backgroundColor = '#fff';
+}
+
+
+// FUNCTION TO DISPLAY/HIDE UPLOAD FORM - ALSO!! ADD CLASS="HIDDEN" TO <form class="upload-form" action="" enctype="multipart/form-data"> IN INDEX.HTML
+
+// function handleOpenUpload () {
+//   console.log('hello testing')
+//   uploadForm.classList.toggle('hidden');
+// }
 
 // event listeners
 
 loginForm.addEventListener('submit', handleLogin);
 uploadForm.addEventListener('submit', handleUpload);
-editForm.addEventListener('submit', handleUpdate);
 deleteBtn.addEventListener('click', handleDelete);
 
-filterBtns.forEach(filterBtn => {
-  filterBtn.addEventListener('click', refreshGenreTracks)
-})
+editForm.addEventListener('submit', handleEdit);
 
-openUplooadBtn.addEventListener('click', handleOpenUpload)
+openUploadBtn.addEventListener('click', openUploadForm)
+closeUploadBtn.addEventListener('click', closeUploadForm)
 
+// option button event listener to open menu is in getSQLtracks function, where we create the user tracks.
+closeEditBtn.addEventListener('click', closeEditForm)
