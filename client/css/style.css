@@ -108,6 +108,9 @@ main {
     width: 100%;
 }
 
+.preloader {
+    width: 64px;
+}
 
 
 /* palette https://coolors.co/627264-a1cda8-b5dfca-c5e7e2-ad9baa */

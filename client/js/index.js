@@ -124,6 +124,10 @@ function refreshGenreTracks(e) {
     getGenreTracks(e);
 }
 
+function clearForm(formElement) {
+  formElement.reset();
+}
+
 getTracks();
 
 function handleUpload(e) {
@@ -136,6 +140,15 @@ function handleUpload(e) {
   formData.append('title', uploadTitleInput.value)
   formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
 
+  feedSection.innerHTML = '';
+  const loadingText = document.createElement('h2');
+  loadingText.textContent = 'Loading...';
+  const preloader = document.createElement('img');
+  preloader.src = '/images/wheel.gif'
+  preloader.classList.add('preloader');
+  feedSection.append(loadingText);
+  feedSection.append(preloader);
+
   axios({
     method: "post",
     url: "/api/tracks",
@@ -143,7 +156,8 @@ function handleUpload(e) {
     headers: { "Content-Type": "multipart/form-data" },
   })
     .then(response => {
-      console.log(response.data.upload)  
+      console.log(response.data.upload)
+      clearForm(uploadForm);  
       if (response.data.upload) {
         refreshTracks();  
       }
