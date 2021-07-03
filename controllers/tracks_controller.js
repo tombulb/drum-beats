@@ -7,7 +7,7 @@ var util = require('util');
 const {Pool} = require('pg')
 const db = new Pool({
   database: 'drum_beats',
-  password: process.env.PG_PASSWORD
+  password: ' '
 })
 
 const cloudinary = require('cloudinary').v2;
