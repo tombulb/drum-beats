@@ -2,18 +2,19 @@
 * {
     color: black;
     font-family: 'PT Sans', sans-serif;
-    /* text-transform: uppercase; */
 }
 
 body {
     height: 100vh;
+    background-color: #3e3e3e;
 }
 
 .app-container {
     display: none;
     height: 100%;
     grid-template-rows: 1fr 15fr 1fr;
-    background-color: white;
+    background-color: #3e3e3e;
+    transition: 1s;
 }
 
 .log-in-box {
@@ -47,8 +48,12 @@ body {
     margin-bottom: 50px;
 }
 
-header, main, footer, .console-section, .feed-section, .player-section, .filter-section {
-    border: 1px solid black;
+header {
+    border-bottom: 2px solid black;
+}
+
+footer {
+  border-top: 2px solid black;
 }
 
 main, header, footer {
@@ -57,25 +62,35 @@ main, header, footer {
 
 main {
     display: grid;
-    grid-template-columns: 3fr 6fr;
+    grid-template-columns:min-content 1fr;
     height: 100%;
     overflow: auto;
 }
 
+.console-section {
+    width: 400px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    margin-right: 25px;
+}
+
+.console-section * {
+  color: white;
+}
+
+.open-upload-btn {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .player-section {
+    min-width: 750px;
+    border-left: 3px solid black;
+    padding-left: 35px; 
     display: grid;
     grid-template-rows: 1fr 8fr;
     overflow: auto;
-}
-
-.feed-section {
-    overflow: auto;    
-    padding: 20px 50px;
-}
-
-.console-section {
-    overflow: auto;
-    text-align: center;
 }
 
 .filter-section {
@@ -83,27 +98,28 @@ main {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.track-div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
+.feed-section {
+    overflow: auto;    
+    padding: 20px 50px;
 }
-
 
 
 .feed-section figure {
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: grey;
-    margin-bottom: 20px;
-    padding: 20px 20px;
+  border-radius: 10px;
+  background-color: grey;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .feed-section figcaption {
-    color: white;
+  color: white;
 }
 
+.track-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+}
 .audio-player {
     margin: 30px auto;
     width: 80%;
@@ -155,12 +171,17 @@ main {
 }
 
 .user-tracks-section {
-    height: 30%;
+    height: 40%;
+    margin: 0;
     overflow: auto;
-    border: 3px solid rgb(173, 155, 170);
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+.user-track-figure {
+  margin-top: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.685);
+  margin-right: 20px;
+  padding: 10px;
 }
 
 .user-track-figure figcaption {
@@ -176,9 +197,7 @@ main {
     height: 1.5em;
 }
 
-.preloader {
-    width: 64px;
-}
+
 
 .open-upload-btn {
     border: 3px solid grey;
@@ -204,7 +223,7 @@ main {
 
 .profile-pic {
     width: 100px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
 .upload-menu, .edit-menu {
@@ -212,26 +231,13 @@ main {
   width: 250px;
   position: fixed;
   margin-left: -250px;
-  /* top: 0;
-  left: 0; */
-  transition: ease-in-out 0.14s;
+  transition: 1s;
   background-color: rgba(0, 0, 0, 0.685);
   color: black;
-  /* position: absolute; */
 }
 
 legend {
     color: white;
-}
-
-.edit-menu {
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  margin-left: -250px;
-  /* top: 0;
-  left: 0; */
-  background-color: mistyrose;
 }
 
 fieldset {
@@ -256,6 +262,27 @@ input, select, button {
 
 .upload-input {
     color: white;
+}
+
+.loading-display {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  margin-left: 250px;
+  transition: 1s;
+}
+
+.preloader {
+  width: 64px;
 }
 
 /* palette https://coolors.co/627264-a1cda8-b5dfca-c5e7e2-ad9baa */

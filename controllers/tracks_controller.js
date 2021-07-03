@@ -7,7 +7,7 @@ var util = require('util');
 const {Pool} = require('pg')
 const db = new Pool({
   database: 'drum_beats',
-  password: ' '
+  password: process.env.PG_PASSWORD
 })
 
 const cloudinary = require('cloudinary').v2;
@@ -23,7 +23,7 @@ cloudinary.config({
 db.connect()
 
 router.get('/', (req, res) => {
-  db.query('select * from tracks order by id DESC;')
+  db.query('SELECT id, author_id, track_name, cloudinary_url, genres, user_name FROM tracks as T INNER JOIN users as U ON T.author_id = U.user_id ORDER BY id DESC;')
     .then(dbRes => {
       res.json(dbRes.rows)
     })
@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
                     console.log("Uploaded on Cloudinary at " + track.url);
 
                     sql = `INSERT INTO tracks 
-                    (track_name, user_id, cloudinary_url, genres)
+                    (track_name, author_id, cloudinary_url, genres)
                     VALUES ($1, 1, $2, $3)`
                     db.query(sql, [fields.title.toLowerCase(), track.url, fields.genre.toLowerCase()])
                       .then(dbRes => {
