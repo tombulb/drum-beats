@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova:wght@700&family=PT+Sans:wght@700&family=Roboto:wght@500&family=Yomogi&display=swap');
 * {
-    color: rgb(66, 77, 67);
+    color: black;
     font-family: 'PT Sans', sans-serif;
     /* text-transform: uppercase; */
 }
 
 body {
     height: 100vh;
-    background-image: url('https://wallpaperaccess.com/full/3957929.jpg');
 }
 
 .app-container {
@@ -74,13 +73,16 @@ main {
 }
 
 .feed-section figure {
-    border: 2px solid #424d43;
+    border: 2px solid black;
     border-radius: 10px;
     background-color: grey;
     margin-bottom: 20px;
     padding: 20px 20px;
 }
 
+.feed-section figcaption {
+    color: white;
+}
 
 .audio-player {
     margin: 30px auto;
@@ -174,14 +176,21 @@ main {
     width: 100px;
 }
 
-.upload-menu {
+.upload-menu, .edit-menu {
   height: 100%;
   width: 250px;
   position: fixed;
   margin-left: -250px;
   /* top: 0;
   left: 0; */
-  background-color: mistyrose;
+  transition: ease-in-out 0.14s;
+  background-color: rgba(0, 0, 0, 0.685);
+  color: black;
+  /* position: absolute; */
+}
+
+legend {
+    color: white;
 }
 
 .edit-menu {
