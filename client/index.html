@@ -9,6 +9,60 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+  <div class="upload-menu">
+
+    <form class="upload-form" action="" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Upload a track</legend>
+        <input name="title" type="text" class="title-upload-input" placeholder="Track Title">
+        <select name="genre" class="genre-upload-input">
+            <option value="" selected disabled>Select a Genre</option>
+            <option value="">Dubstep</option>
+            <option value="">Country</option>
+            <option value="">Blues</option>
+            <option value="">Heavy Metal</option>
+            <option value="">Jazz</option>
+            <option value="">Rock</option>
+            <option value="">Disco</option>
+            <option value="">Reggae</option>
+            <option value="">Prog Rock</option>
+        </select>
+        <input class="upload-input" name="upload-input" type="file" accept=".wav,.mp3,.m4a,.flac,.aac,.aiff,.ogg,.amr,.opus">
+        <button>upload</button>
+
+      </fieldset>
+    </form>
+    <button class="close-upload-btn">close</button>
+  </div>
+
+  <div class="edit-menu">
+
+    <form class="edit-form" action="">
+      <fieldset>
+        <legend>Update Track</legend>
+        <input name="title" type="text" class="title-edit-input">
+        <select name="genre" class="genre-edit-input">
+            <option value="">Dubstep</option>
+            <option value="">Country</option>
+            <option value="">Blues</option>
+            <option value="">Heavy Metal</option>
+            <option value="">Jazz</option>
+            <option value="">Rock</option>
+            <option value="">Disco</option>
+            <option value="">Reggae</option>
+            <option value="">Prog Rock</option>
+        </select>
+        <button class="update-btn">update</button>
+        <button class="delete-btn">delete</button>
+      </fieldset>
+    </form>
+
+    <button class="close-edit-btn">close</button>
+  </div>
+
+
+
     <div class="log-in-container">
         <div class="log-in-box">
           <form class="log-in-form" action="">
@@ -52,26 +106,7 @@
                   </fieldset>
                 </form>
 
-                <form class="hidden edit-form" action="">
-                  <fieldset>
-                    <legend>Update Track</legend>
-                    <input name="title" type="text" class="title-edit-input">
-                    <select name="genre" class="genre-edit-input">
-                        <option value=""></option>
-                        <option value="">Dubstep</option>
-                        <option value="">Country</option>
-                        <option value="">Blues</option>
-                        <option value="">Heavy Metal</option>
-                        <option value="">Jazz</option>
-                        <option value="">Rock</option>
-                        <option value="">Disco</option>
-                        <option value="">Reggae</option>
-                        <option value="">Prog Rock</option>
-                    </select>
-                    <button class="update-btn">update</button>
-                    <button class="delete-btn">delete</button>
-                  </fieldset>
-                </form>
+      
                 <h2>Tracks by John Doe</h2> 
                 <div class="user-tracks-section"></div>
             </div>
