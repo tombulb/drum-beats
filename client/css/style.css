@@ -75,6 +75,7 @@ main {
 
 .console-section {
     overflow: auto;
+    text-align: center;
 }
 
 .filter-section {
@@ -153,14 +154,13 @@ main {
     margin-bottom: 20px;
 }
 
-.user-track-figure {
-
-}
-
 .user-tracks-section {
     height: 30%;
     overflow: auto;
     border: 3px solid rgb(173, 155, 170);
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .user-track-figure figcaption {
@@ -204,6 +204,7 @@ main {
 
 .profile-pic {
     width: 100px;
+    margin: 0 auto;
 }
 
 .upload-menu, .edit-menu {
@@ -233,6 +234,29 @@ legend {
   background-color: mistyrose;
 }
 
+fieldset {
+    display: flex;
+    flex-direction: column;
+
+}
+
+form {
+    padding-top: 40px;
+}
+
+legend {
+    margin: 20px 20px;
+}
+
+input, select, button {
+    width: 80%;
+    margin: 20px 20px;
+
+}
+
+.upload-input {
+    color: white;
+}
 
 /* palette https://coolors.co/627264-a1cda8-b5dfca-c5e7e2-ad9baa */
 
