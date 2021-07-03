@@ -16,6 +16,7 @@ const updateBtn = document.querySelector('.update-btn')
 const userTracksSection = document.querySelector('.user-tracks-section')
 const deleteBtn = document.querySelector('.delete-btn')
 const filterBtns = document.querySelectorAll('.filter-btn');
+const openUplooadBtn = document.querySelector('.open-upload-btn');
 
 function handleLogin(e) {
     e.preventDefault();
@@ -38,9 +39,7 @@ function handleLoggedIn(e) {
 
 handleLoggedIn()
 
-// event listeners
 
-loginForm.addEventListener('submit', handleLogin);
 
 // axios requests on '/' static load
 
@@ -124,6 +123,10 @@ function refreshGenreTracks(e) {
     getGenreTracks(e);
 }
 
+function clearForm(formElement) {
+  formElement.reset();
+}
+
 getTracks();
 
 function handleUpload(e) {
@@ -136,6 +139,15 @@ function handleUpload(e) {
   formData.append('title', uploadTitleInput.value)
   formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
 
+  feedSection.innerHTML = '';
+  const loadingText = document.createElement('h2');
+  loadingText.textContent = 'Loading...';
+  const preloader = document.createElement('img');
+  preloader.src = '/images/wheel.gif'
+  preloader.classList.add('preloader');
+  feedSection.append(loadingText);
+  feedSection.append(preloader);
+
   axios({
     method: "post",
     url: "/api/tracks",
@@ -143,7 +155,8 @@ function handleUpload(e) {
     headers: { "Content-Type": "multipart/form-data" },
   })
     .then(response => {
-      console.log(response.data.upload)  
+      console.log(response.data.upload)
+      clearForm(uploadForm);  
       if (response.data.upload) {
         refreshTracks();  
       }
@@ -208,10 +221,19 @@ function handleOptions(e) {
     console.log(response);
     editTitleInput.value = response.data[0].track_name
     editGenreInput.selectedOptions[0].textContent = response.data[0].genres
+    editForm.classList.toggle('hidden');
   })
+
 }
 
+function handleOpenUpload () {
+  console.log('hello testing')
+  uploadForm.classList.toggle('hidden');
+}
 
+// event listeners
+
+loginForm.addEventListener('submit', handleLogin);
 uploadForm.addEventListener('submit', handleUpload);
 editForm.addEventListener('submit', handleUpdate);
 deleteBtn.addEventListener('click', handleDelete);
@@ -219,3 +241,6 @@ deleteBtn.addEventListener('click', handleDelete);
 filterBtns.forEach(filterBtn => {
   filterBtn.addEventListener('click', refreshGenreTracks)
 })
+
+openUplooadBtn.addEventListener('click', handleOpenUpload)
+
