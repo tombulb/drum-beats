@@ -66,11 +66,24 @@ main {
 }
 
 .track-div {
-  background-color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
   
+}
+
+.feed-section figure {
+    border: 2px solid #424d43;
+    border-radius: 10px;
+    background-color: #a1cda8;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+}
+
+
+.audio-player {
+    margin: 30px auto;
+    width: 80%;
 }
 
 .option-btn {
@@ -86,6 +99,10 @@ main {
     text-align: center;
 }
 
+.filter-btn {
+    cursor: pointer;
+}
+
 .header-logo {
     width: 40px;
 }
@@ -97,6 +114,7 @@ main {
 .user-tracks-section {
     height: 30%;
     overflow: auto;
+    border: 3px solid rgb(173, 155, 170);
 }
 
 .user-track-figure figcaption {
@@ -110,6 +128,28 @@ main {
 
 .preloader {
     width: 64px;
+}
+
+.open-upload-btn {
+    border: 3px solid rgb(173, 155, 170);
+    margin: 5px;
+    text-align: center;
+}
+
+.open-upload-btn:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.membership, .open-upload-btn, .upload-form, .edit-form {
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 100px;
 }
 
 

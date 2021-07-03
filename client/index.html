@@ -26,8 +26,13 @@
         </header>
         <main>
             <div class="console-section">
-                <h2>Create form</h2>  
-                <form class="upload-form" action="" enctype="multipart/form-data">
+                <img class="profile-pic" src="/images/john_doe.jpeg" alt="">
+                <h2>John Doe</h2>
+                <p class="membership">Member since Sept 2009</p> 
+                <div class="open-upload-btn">Upload</div>
+                <form class="hidden upload-form" action="" enctype="multipart/form-data">
+                  <fieldset>
+                    <legend>Upload a track</legend>
                     <input name="title" type="text" class="title-upload-input" placeholder="Track Title">
                     <select name="genre" class="genre-upload-input">
                         <option value="" disabled>Select a Genre</option>
@@ -43,10 +48,13 @@
                     </select>
                     <input class="upload-input" name="upload-input" type="file" accept=".wav,.mp3,.m4a,.flac,.aac,.aiff,.ogg,.amr,.opus">
                     <button>upload</button>
+
+                  </fieldset>
                 </form>
 
-                <h2>Update and Delete Form</h2>
-                <form class="edit-form" action="">
+                <form class="hidden edit-form" action="">
+                  <fieldset>
+                    <legend>Update Track</legend>
                     <input name="title" type="text" class="title-edit-input">
                     <select name="genre" class="genre-edit-input">
                         <option value=""></option>
@@ -61,8 +69,10 @@
                         <option value="">Prog Rock</option>
                     </select>
                     <button class="update-btn">update</button>
-                  </form>
-                  <button class="delete-btn">delete</button>
+                    <button class="delete-btn">delete</button>
+                  </fieldset>
+                </form>
+                <h2>Tracks by John Doe</h2> 
                 <div class="user-tracks-section"></div>
             </div>
             <div class="player-section">

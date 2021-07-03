@@ -16,6 +16,7 @@ const updateBtn = document.querySelector('.update-btn')
 const userTracksSection = document.querySelector('.user-tracks-section')
 const deleteBtn = document.querySelector('.delete-btn')
 const filterBtns = document.querySelectorAll('.filter-btn');
+const openUplooadBtn = document.querySelector('.open-upload-btn');
 
 function handleLogin(e) {
     e.preventDefault();
@@ -38,9 +39,7 @@ function handleLoggedIn(e) {
 
 handleLoggedIn()
 
-// event listeners
 
-loginForm.addEventListener('submit', handleLogin);
 
 // axios requests on '/' static load
 
@@ -222,10 +221,19 @@ function handleOptions(e) {
     console.log(response);
     editTitleInput.value = response.data[0].track_name
     editGenreInput.selectedOptions[0].textContent = response.data[0].genres
+    editForm.classList.toggle('hidden');
   })
+
 }
 
+function handleOpenUpload () {
+  console.log('hello testing')
+  uploadForm.classList.toggle('hidden');
+}
 
+// event listeners
+
+loginForm.addEventListener('submit', handleLogin);
 uploadForm.addEventListener('submit', handleUpload);
 editForm.addEventListener('submit', handleUpdate);
 deleteBtn.addEventListener('click', handleDelete);
@@ -233,3 +241,6 @@ deleteBtn.addEventListener('click', handleDelete);
 filterBtns.forEach(filterBtn => {
   filterBtn.addEventListener('click', refreshGenreTracks)
 })
+
+openUplooadBtn.addEventListener('click', handleOpenUpload)
+
