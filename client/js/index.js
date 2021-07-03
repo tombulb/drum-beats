@@ -189,7 +189,7 @@ function handleUpload(e) {
 
 function handleEdit(e) {
   e.preventDefault()
-  
+  closeEditForm()
   let updatedTrackInfo = {
     trackName: editTitleInput.value,
     trackGenre: editGenreInput.selectedOptions[0].textContent
@@ -213,6 +213,7 @@ function handleEdit(e) {
 
 function handleDelete(e) {
   e.preventDefault()
+  closeEditForm()
 
   axios.delete(`/api/tracks/${deleteBtn.id}`)
   .then(response => {
@@ -226,7 +227,6 @@ function handleDelete(e) {
   .catch(err => {
     console.log(err);
   })
-
 }
 
 function handleOptions(e) {
@@ -290,6 +290,10 @@ uploadForm.addEventListener('submit', handleUpload);
 deleteBtn.addEventListener('click', handleDelete);
 
 editForm.addEventListener('submit', handleEdit);
+
+filterBtns.forEach(filterBtn => {
+  filterBtn.addEventListener('click', refreshGenreTracks)
+})
 
 openUploadBtn.addEventListener('click', openUploadForm)
 closeUploadBtn.addEventListener('click', closeUploadForm)
