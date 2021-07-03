@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova:wght@700&family=PT+Sans:wght@700&family=Roboto:wght@500&family=Yomogi&display=swap');
 * {
     color: rgb(66, 77, 67);
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'PT Sans', sans-serif;
+    /* text-transform: uppercase; */
 }
 
 body {
     height: 100vh;
+    background-image: url('https://wallpaperaccess.com/full/3957929.jpg');
 }
 
 .app-container {
     display: none;
     height: 100%;
     grid-template-rows: 1fr 15fr 1fr;
-    background-color: rgb(226, 243, 240);
+    background-color: white;
 }
 
 .log-in-box {
@@ -75,7 +76,7 @@ main {
 .feed-section figure {
     border: 2px solid #424d43;
     border-radius: 10px;
-    background-color: #a1cda8;
+    background-color: grey;
     margin-bottom: 20px;
     padding: 20px 20px;
 }
@@ -94,13 +95,30 @@ main {
 }
 
 .filter-btn {
-    border: 3px solid rgb(173, 155, 170);
+    border: 3px solid grey;
     margin: 5px;
     text-align: center;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    padding: 10px auto;
 }
 
 .filter-btn {
     cursor: pointer;
+}
+
+.filter-btn:hover {
+    cursor: pointer;
+    color: white;
+    background-color: grey;
+}
+
+.filter-btn:active {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    border: 3px solid black;
 }
 
 .header-logo {
@@ -131,13 +149,17 @@ main {
 }
 
 .open-upload-btn {
-    border: 3px solid rgb(173, 155, 170);
-    margin: 5px;
+    border: 3px solid grey;
+    border-radius: 4px;
+    margin-left: 109px;
+    margin-right: 109px;
     text-align: center;
 }
 
 .open-upload-btn:hover {
     cursor: pointer;
+    color: white;
+    background-color: grey;
 }
 
 .hidden {
