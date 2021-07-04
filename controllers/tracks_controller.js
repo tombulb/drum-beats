@@ -7,7 +7,7 @@ var util = require('util');
 const {Pool} = require('pg')
 const db = new Pool({
   database: 'drum_beats',
-  password: process.env.PG_PASSWORD
+  password: ' '
 })
 
 const cloudinary = require('cloudinary').v2;
@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
 
       cloudinary
                 .uploader
-                .upload(files.track.path,{tags: 'metal', resource_type: 'video'})
+                .upload(files.track.path,{resource_type: 'video'})
                 .then(track => {
                     console.log("Uploaded on Cloudinary at " + track.url);
 

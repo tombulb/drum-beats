@@ -126,8 +126,6 @@ function getSQLTracks(dbTracks, includeUserTracks) {
       trackConsoleFig.appendChild(trackDiv);
       trackDiv.appendChild(audioPlayer);
 
-
-
       const optionBtn = document.createElement('img')
       optionBtn.setAttribute('src', 'images/gear-button.png')
       optionBtn.setAttribute('class', `option-btn ${track.id}`)

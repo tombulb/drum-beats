@@ -1,8 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova:wght@700&family=PT+Sans:wght@700&family=Roboto:wght@500&family=Yomogi&display=swap');
+
 * {
     color: black;
     font-family: 'PT Sans', sans-serif;
 }
+
+/* scrollbar styling */
+
+.feed-section::-webkit-scrollbar, .user-tracks-section::-webkit-scrollbar {
+    width: 0.4em;
+}
+ 
+.feed-section::-webkit-scrollbar-track, .user-tracks-section::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.feed-section::-webkit-scrollbar-thumb, .user-tracks-section::-webkit-scrollbar-thumb{
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+/* option button animations */
+
+.option-btn:hover{
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 body {
     height: 100vh;
@@ -14,7 +42,7 @@ body {
     height: 100%;
     grid-template-rows: 1fr 15fr 1fr;
     background-color: #3e3e3e;
-    transition: 1s;
+    transition: 0.3s;
 }
 
 .log-in-box {
@@ -93,7 +121,13 @@ main {
     overflow: auto;
 }
 
+/* .filter-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+} */
+
 .filter-section {
+    /* margin: 0 auto; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
@@ -133,17 +167,14 @@ main {
 }
 
 .filter-btn {
+    min-width: 100px;
     border: 3px solid grey;
     margin: 5px;
     text-align: center;
     border-radius: 4px;
     background-color: white;
-    color: black;
+    color: grey;
     padding: 10px auto;
-}
-
-.filter-btn {
-    cursor: pointer;
 }
 
 .filter-btn:hover {
@@ -179,7 +210,7 @@ main {
 .user-track-figure {
   margin-top: 5px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.685);
+  background-color: rgba(0, 0, 0, 0.308);
   margin-right: 20px;
   padding: 10px;
 }
@@ -200,7 +231,7 @@ main {
 
 
 .open-upload-btn {
-    border: 3px solid grey;
+    border: 3px solid black;
     border-radius: 4px;
     width: 40%;
     margin: 0 auto;
@@ -210,7 +241,7 @@ main {
 .open-upload-btn:hover {
     cursor: pointer;
     color: white;
-    background-color: grey;
+    background-color: black;
 }
 
 .hidden {
@@ -231,7 +262,7 @@ main {
   width: 250px;
   position: fixed;
   margin-left: -250px;
-  transition: 1s;
+  transition: 0.3s;
   background-color: rgba(0, 0, 0, 0.685);
   color: black;
 }
@@ -243,7 +274,11 @@ legend {
 fieldset {
     display: flex;
     flex-direction: column;
+}
 
+fieldset > button:hover, .close-upload-btn:hover {
+    background-color:black;
+    color: white
 }
 
 form {
@@ -278,13 +313,12 @@ input, select, button {
   height: 100%;
   width: 100%;
   margin-left: 250px;
-  transition: 1s;
+  transition: 0.3s;
 }
 
 .preloader {
   width: 64px;
 }
 
-/* palette https://coolors.co/627264-a1cda8-b5dfca-c5e7e2-ad9baa */
 
 
