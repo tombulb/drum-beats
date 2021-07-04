@@ -162,17 +162,8 @@ function handleUpload(e) {
   formData.append('title', uploadTitleInput.value)
   formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
 
-
-  // PRELOADER GIF
   feedSection.innerHTML = '';
-  // const loadingText = document.createElement('h2');
-  // loadingText.textContent = 'Loading...';
-  // const preloader = document.createElement('img');
-  // preloader.src = '/images/wheel.gif'
-  // preloader.classList.add('preloader');
-  // feedSection.append(preloader);
-  // feedSection.append(loadingText);
-
+ 
   axios({
     method: "post",
     url: "/api/tracks",
