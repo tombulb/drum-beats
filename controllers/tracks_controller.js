@@ -32,19 +32,28 @@ router.get('/', (req, res) => {
         const waveURL = url.join('.');
         track.waveform_image = cloudinary.image(`${waveURL}`, {
           flags: "waveform",
-          resource_type: "video"
+          resource_type: "video",
+          background: "none"
           })
-          dbRes.rows
       }) 
       res.json(dbRes.rows)
-    })
-  return 
+    }) 
 })
 
-router.get('/genre/:genre', (req, res) => {
+router.get('/:genre', (req, res) => {
   const genre = req.params.genre.split('-')[0];
   db.query(`SELECT id, author_id, track_name, cloudinary_url, genres, user_name FROM tracks as T INNER JOIN users as U ON T.author_id = U.user_id WHERE genres ILIKE '${genre}%';`)
     .then(dbRes => {
+      dbRes.rows.forEach(track => {
+        const url = track.cloudinary_url.split('/').pop().split('.');
+        url[1] = 'png'
+        const waveURL = url.join('.');
+        track.waveform_image = cloudinary.image(`${waveURL}`, {
+          flags: "waveform",
+          resource_type: "video",
+          background: "none"
+          })
+        })
       res.json(dbRes.rows)
     })
 })
