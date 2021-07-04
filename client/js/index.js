@@ -43,10 +43,6 @@ function handleLoggedIn(e) {
 
 // handleLoggedIn()
 
-
-
-// axios requests on '/' static load
-
 axios.get('/api/sessions').then(res => {
     console.log(res.data)
     if (res.data.authenticated) {
@@ -56,7 +52,10 @@ axios.get('/api/sessions').then(res => {
 
 function getTracks() {
     axios.get('/api/tracks').then(res => {
+     
         let dbTracks = res.data
+        
+        console.log(dbTracks);
 
         let includeUserTracks = true;
 
@@ -106,20 +105,10 @@ function getSQLTracks(dbTracks, includeUserTracks) {
     playBtn.setAttribute('value', track.cloudinary_url)
     playBtn.addEventListener('click', playTrack)
 
-// CREATES CLOUDINARY WAV FORM
-
-
-// const wavForm = track.cloudinary_url.split('/').pop()
-// const waveForm = document.createElement('img')
-// waveForm.setAttribute('src', cloudinary.image(`${wavForm}`, {transformation: [
-//   {flags: "waveform"}
-// ]}))
-// wavForm.classList.add('wav-form')
-    // wavForm.setAttribute('src', `${wavForm}`)
-    
-    trackFig.appendChild(playBtn);
     trackFig.appendChild(trackTitle);
-    // trackFig.appendChild(p);
+    const waveFormImg = track.waveform_image
+    trackFig.innerHTML += waveFormImg
+    trackFig.appendChild(playBtn);
     feedSection.appendChild(trackFig);
 
     if (track.author_id === 1 && includeUserTracks) {

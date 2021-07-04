@@ -12,6 +12,7 @@ const db = new Pool({
 
 const cloudinary = require('cloudinary').v2;
 const { createSecretKey } = require('crypto');
+const { response } = require('express');
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -24,12 +25,20 @@ db.connect()
 
 router.get('/', (req, res) => {
   db.query('SELECT id, author_id, track_name, cloudinary_url, genres, user_name FROM tracks as T INNER JOIN users as U ON T.author_id = U.user_id ORDER BY id DESC;')
-    .then(dbRes => {
+  .then(dbRes => {
+      dbRes.rows.forEach(track => {
+        const url = track.cloudinary_url.split('/').pop().split('.');
+        url[1] = 'png'
+        const waveURL = url.join('.');
+        track.waveform_image = cloudinary.image(`${waveURL}`, {
+          flags: "waveform",
+          resource_type: "video"
+          })
+          dbRes.rows
+      }) 
       res.json(dbRes.rows)
     })
-    // cloudinary.image(`${wavForm}`, {transformation: [
-    //   {flags: "waveform"}
-    // ]})
+  return 
 })
 
 router.get('/genre/:genre', (req, res) => {
@@ -41,7 +50,6 @@ router.get('/genre/:genre', (req, res) => {
 })
   
 router.post('/', (req, res) => {
-  console.log("A file has been sent.");
   const form = formidable({ multiples: true });
 
   form.parse(req, (err, fields, files) => {
@@ -54,14 +62,13 @@ router.post('/', (req, res) => {
                 .uploader
                 .upload(files.track.path,{resource_type: 'video'})
                 .then(track => {
-                    console.log("Uploaded on Cloudinary at " + track.url);
+                    console.log(track);
 
                     sql = `INSERT INTO tracks 
                     (track_name, author_id, cloudinary_url, genres)
                     VALUES ($1, 1, $2, $3)`
                     db.query(sql, [fields.title.toLowerCase(), track.url, fields.genre.toLowerCase()])
                       .then(dbRes => {
-                        console.log(dbRes)
                         res.json({upload: true})
                       })
                 })
@@ -70,6 +77,7 @@ router.post('/', (req, res) => {
                   console.log("** File Upload (Promise)");
                   if (err) { console.warn(err); }
                 });
+      // cloudinary.uploader.upload(waveformurl,{resource_type: 'image'}).then
       return files;
   });
 })

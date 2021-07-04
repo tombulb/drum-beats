@@ -121,13 +121,7 @@ main {
     overflow: auto;
 }
 
-/* .filter-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-} */
-
 .filter-section {
-    /* margin: 0 auto; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
@@ -198,7 +192,7 @@ main {
 .option-div {
     display: flex;
     text-align: center;
-    border-left: 3px solid black;
+    border-left: 3px solid #3e3e3e;
 }
 
 .option-btn {
@@ -327,6 +321,21 @@ input, select, button {
 
 .preloader {
   width: 64px;
+}
+
+.track-figure {
+  text-align: center;
+}
+
+.track-figure figcaption {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.track-figure img {
+  height: 50px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .player-footer {
