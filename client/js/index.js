@@ -136,12 +136,8 @@ function getSQLTracks(dbTracks, includeUserTracks) {
       playBtn.addEventListener('click', playTrack)
       
       trackConsoleFig.appendChild(trackDiv);
-<<<<<<< HEAD
-      trackDiv.appendChild(trackTitle);
-      trackDiv.appendChild(audioPlayer);
-=======
+      trackDiv.appendChild(trackTitle)
       trackDiv.appendChild(playBtn);
->>>>>>> working player
 
       const optionDiv = document.createElement('div')
       const optionBtn = document.createElement('img')
