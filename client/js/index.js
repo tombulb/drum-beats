@@ -122,16 +122,20 @@ function getSQLTracks(dbTracks, includeUserTracks) {
       audioPlayer.setAttribute('controlsList', 'nodownload')
       audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
       
-      trackConsoleFig.appendChild(trackTitle);
       trackConsoleFig.appendChild(trackDiv);
+      trackDiv.appendChild(trackTitle);
       trackDiv.appendChild(audioPlayer);
 
+      const optionDiv = document.createElement('div')
       const optionBtn = document.createElement('img')
       optionBtn.setAttribute('src', 'images/gear-button.png')
+      optionDiv.setAttribute('class', `option-div ${track.id}`)
       optionBtn.setAttribute('class', `option-btn ${track.id}`)
+      optionDiv.appendChild(optionBtn)
+      trackConsoleFig.appendChild(optionDiv)
+
       optionBtn.addEventListener('click', handleOptions)
 
-      trackDiv.appendChild(optionBtn)
       trackConsoleFig.classList.add('user-track-figure')
       userTracksSection.appendChild(trackConsoleFig)
       consoleSection.appendChild(userTracksSection)
@@ -162,8 +166,17 @@ function handleUpload(e) {
   formData.append('title', uploadTitleInput.value)
   formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
 
+
+  // PRELOADER GIF
   feedSection.innerHTML = '';
- 
+  // const loadingText = document.createElement('h2');
+  // loadingText.textContent = 'Loading...';
+  // const preloader = document.createElement('img');
+  // preloader.src = '/images/wheel.gif'
+  // preloader.classList.add('preloader');
+  // feedSection.append(preloader);
+  // feedSection.append(loadingText);
+
   axios({
     method: "post",
     url: "/api/tracks",
