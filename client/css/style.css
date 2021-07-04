@@ -5,6 +5,19 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+.feed-section::-webkit-scrollbar, .user-tracks-section::-webkit-scrollbar {
+    width: 0.4em;
+}
+ 
+.feed-section::-webkit-scrollbar-track, .user-tracks-section::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.feed-section::-webkit-scrollbar-thumb, .user-tracks-section::-webkit-scrollbar-thumb{
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
 body {
     height: 100vh;
     background-color: #3e3e3e;
@@ -15,7 +28,7 @@ body {
     height: 100%;
     grid-template-rows: 1fr 15fr 1fr;
     background-color: #3e3e3e;
-    transition: 1s;
+    transition: 0.3s;
 }
 
 .log-in-box {
@@ -235,7 +248,7 @@ main {
   width: 250px;
   position: fixed;
   margin-left: -250px;
-  transition: 1s;
+  transition: 0.3s;
   background-color: rgba(0, 0, 0, 0.685);
   color: black;
 }
@@ -247,6 +260,11 @@ legend {
 fieldset {
     display: flex;
     flex-direction: column;
+}
+
+fieldset > button:hover, .close-upload-btn:hover {
+    background-color:black;
+    color: white
 }
 
 form {
@@ -281,13 +299,12 @@ input, select, button {
   height: 100%;
   width: 100%;
   margin-left: 250px;
-  transition: 1s;
+  transition: 0.3s;
 }
 
 .preloader {
   width: 64px;
 }
 
-/* palette https://coolors.co/627264-a1cda8-b5dfca-c5e7e2-ad9baa */
 
 
