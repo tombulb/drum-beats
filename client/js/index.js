@@ -20,6 +20,7 @@ const openUploadBtn = document.querySelector('.open-upload-btn');
 const closeUploadBtn = document.querySelector('.close-upload-btn');
 const closeEditBtn = document.querySelector('.close-edit-btn')
 const loadingDisplay = document.querySelector('.loading-display')
+const audioPlayer = document.querySelector('.audio-player')
 
 function handleLogin(e) {
     e.preventDefault();
@@ -55,7 +56,6 @@ axios.get('/api/sessions').then(res => {
 
 function getTracks() {
     axios.get('/api/tracks').then(res => {
-        console.log(res.data)
         let dbTracks = res.data
 
         let includeUserTracks = true;
@@ -80,16 +80,20 @@ function getGenreTracks(e) {
     axios
         .get(`/api/tracks/genre/${genre}`)
         .then(res => {
-            console.log(res.data)
             let dbTracks = res.data
             getSQLTracks(dbTracks, includeUserTracks);
       })
   }
 }
 
+function playTrack(e) {
+  audioPlayer.setAttribute('src', e.target.value);
+}
+
 
 function getSQLTracks(dbTracks, includeUserTracks) {
   dbTracks.forEach((track) => {
+
     const trackFig = document.createElement('figure')
     const trackTitle = document.createElement('figcaption')
     trackTitle.textContent = `Track name: ${track.track_name} by ${track.user_name}`
@@ -97,15 +101,25 @@ function getSQLTracks(dbTracks, includeUserTracks) {
     trackDiv.setAttribute('class', 'track-div')
     trackFig.setAttribute('class', 'track-figure')
 
-    const audioPlayer = document.createElement('audio')
-    audioPlayer.classList.add('audio-player')
-    audioPlayer.setAttribute('controls', 'true')
-    audioPlayer.setAttribute('controlsList', 'nodownload')
-    audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+    const playBtn = document.createElement('button')
+    playBtn.textContent = 'Play'
+    playBtn.setAttribute('value', track.cloudinary_url)
+    playBtn.addEventListener('click', playTrack)
+
+// CREATES CLOUDINARY WAV FORM
+
+
+// const wavForm = track.cloudinary_url.split('/').pop()
+// const waveForm = document.createElement('img')
+// waveForm.setAttribute('src', cloudinary.image(`${wavForm}`, {transformation: [
+//   {flags: "waveform"}
+// ]}))
+// wavForm.classList.add('wav-form')
+    // wavForm.setAttribute('src', `${wavForm}`)
     
+    trackFig.appendChild(playBtn);
     trackFig.appendChild(trackTitle);
-    trackFig.appendChild(trackDiv);
-    trackDiv.appendChild(audioPlayer);
+    // trackFig.appendChild(p);
     feedSection.appendChild(trackFig);
 
     if (track.author_id === 1 && includeUserTracks) {
@@ -116,15 +130,14 @@ function getSQLTracks(dbTracks, includeUserTracks) {
       const trackDiv = document.createElement('div')
       trackDiv.setAttribute('class', 'track-div user-track-div')
 
-      const audioPlayer = document.createElement('audio')
-      audioPlayer.classList.add('audio-player')
-      audioPlayer.setAttribute('controls', 'true')
-      audioPlayer.setAttribute('controlsList', 'nodownload')
-      audioPlayer.setAttribute('src', `${track.cloudinary_url}`)
+      const playBtn = document.createElement('button')
+      playBtn.textContent = 'Play'
+      playBtn.setAttribute('value', track.cloudinary_url)
+      playBtn.addEventListener('click', playTrack)
       
       trackConsoleFig.appendChild(trackDiv);
-      trackDiv.appendChild(trackTitle);
-      trackDiv.appendChild(audioPlayer);
+      trackDiv.appendChild(trackTitle)
+      trackDiv.appendChild(playBtn);
 
       const optionDiv = document.createElement('div')
       const optionBtn = document.createElement('img')

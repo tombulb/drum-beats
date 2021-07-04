@@ -103,6 +103,10 @@ main {
   color: white;
 }
 
+.user-track-div button {
+  color: black;
+}
+
 .open-upload-btn {
   margin-left: 0px;
   margin-right: 0px;
@@ -328,6 +332,7 @@ input, select, button {
 .player-footer {
   border-top: 2px solid black;
   text-align: center;
+  background-color: lightgrey;
 }
 
 .copyright-footer {
