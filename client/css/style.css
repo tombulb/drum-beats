@@ -80,11 +80,7 @@ header {
     border-bottom: 2px solid black;
 }
 
-footer {
-  border-top: 2px solid black;
-}
-
-main, header, footer {
+main, header {
     padding: 20px 40px;
 }
 
@@ -320,5 +316,12 @@ input, select, button {
   width: 64px;
 }
 
+.player-footer {
+  border-top: 2px solid black;
+  text-align: center;
+}
 
-
+.copyright-footer {
+  height: 20px;
+  padding: 0;
+}

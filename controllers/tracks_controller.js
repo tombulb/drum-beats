@@ -7,7 +7,7 @@ var util = require('util');
 const {Pool} = require('pg')
 const db = new Pool({
   database: 'drum_beats',
-  password: ' '
+  password: process.env.PG_PASSWORD
 })
 
 const cloudinary = require('cloudinary').v2;
@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 
 router.get('/genre/:genre', (req, res) => {
   const genre = req.params.genre.split('-')[0];
-  db.query(`SELECT * FROM tracks WHERE genres ILIKE '${genre}%';`)
+  db.query(`SELECT id, author_id, track_name, cloudinary_url, genres, user_name FROM tracks as T INNER JOIN users as U ON T.author_id = U.user_id WHERE genres ILIKE '${genre}%';`)
     .then(dbRes => {
       res.json(dbRes.rows)
     })
