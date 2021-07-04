@@ -32,7 +32,8 @@ router.get('/', (req, res) => {
         const waveURL = url.join('.');
         track.waveform_image = cloudinary.image(`${waveURL}`, {
           flags: "waveform",
-          resource_type: "video"
+          resource_type: "video",
+          background: "grey"
           })
           dbRes.rows
       }) 
