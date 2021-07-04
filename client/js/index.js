@@ -19,6 +19,7 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const openUploadBtn = document.querySelector('.open-upload-btn');
 const closeUploadBtn = document.querySelector('.close-upload-btn');
 const closeEditBtn = document.querySelector('.close-edit-btn')
+const loadingDisplay = document.querySelector('.loading-display')
 
 function handleLogin(e) {
     e.preventDefault();
@@ -91,9 +92,10 @@ function getSQLTracks(dbTracks, includeUserTracks) {
   dbTracks.forEach((track) => {
     const trackFig = document.createElement('figure')
     const trackTitle = document.createElement('figcaption')
-    trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
+    trackTitle.textContent = `Track name: ${track.track_name} by ${track.user_name}`
     const trackDiv = document.createElement('div')
     trackDiv.setAttribute('class', 'track-div')
+    trackFig.setAttribute('class', 'track-figure')
 
     const audioPlayer = document.createElement('audio')
     audioPlayer.classList.add('audio-player')
@@ -106,11 +108,11 @@ function getSQLTracks(dbTracks, includeUserTracks) {
     trackDiv.appendChild(audioPlayer);
     feedSection.appendChild(trackFig);
 
-    if (track.user_id === 1 && includeUserTracks) {
+    if (track.author_id === 1 && includeUserTracks) {
 
       const trackConsoleFig = document.createElement('figure')
       const trackTitle = document.createElement('figcaption')
-      trackTitle.textContent = `Track name: ${track.track_name} by user: ${track.user_id}`
+      trackTitle.textContent = `Track name: ${track.track_name}`
       const trackDiv = document.createElement('div')
       trackDiv.setAttribute('class', 'track-div user-track-div')
 
@@ -152,6 +154,8 @@ getTracks();
 
 function handleUpload(e) {
   e.preventDefault()
+  closeUploadForm()
+  loadingDisplay.style.display = "flex"
   var files = uploadInput.files;
   var file = files[0];
 
@@ -160,14 +164,16 @@ function handleUpload(e) {
   formData.append('title', uploadTitleInput.value)
   formData.append('genre', uploadGenreInput.selectedOptions[0].textContent)
 
+
+  // PRELOADER GIF
   feedSection.innerHTML = '';
-  const loadingText = document.createElement('h2');
-  loadingText.textContent = 'Loading...';
-  const preloader = document.createElement('img');
-  preloader.src = '/images/wheel.gif'
-  preloader.classList.add('preloader');
-  feedSection.append(loadingText);
-  feedSection.append(preloader);
+  // const loadingText = document.createElement('h2');
+  // loadingText.textContent = 'Loading...';
+  // const preloader = document.createElement('img');
+  // preloader.src = '/images/wheel.gif'
+  // preloader.classList.add('preloader');
+  // feedSection.append(preloader);
+  // feedSection.append(loadingText);
 
   axios({
     method: "post",
@@ -176,7 +182,7 @@ function handleUpload(e) {
     headers: { "Content-Type": "multipart/form-data" },
   })
     .then(response => {
-      console.log(response.data.upload)
+      loadingDisplay.style.display = "none"
       clearForm(uploadForm);  
       if (response.data.upload) {
         refreshTracks();  
@@ -244,7 +250,6 @@ function handleOptions(e) {
     console.log(response);
     editTitleInput.value = response.data[0].track_name
     editGenreInput.selectedOptions[0].textContent = response.data[0].genres
-    // editForm.classList.toggle('hidden');
   })
 
 }
@@ -253,30 +258,25 @@ function openUploadForm() {
   closeEditForm()
   document.querySelector('.upload-menu').style.marginLeft = '0';
   document.querySelector('.app-container').style.marginLeft = '250px';
-  document.body.style.backgroundColor = 'rgba(0,0,0,0.4)';
 }
 
 function closeUploadForm() {
   document.querySelector('.upload-menu').style.marginLeft = '-250px';
   document.querySelector('.app-container').style.marginLeft = '0';
-  document.body.style.backgroundColor = '#fff';
 }
 
 function openEditForm() {
   closeUploadForm()
   document.querySelector('.edit-menu').style.marginLeft = '0';
   document.querySelector('.app-container').style.marginLeft = '250px';
-  document.body.style.backgroundColor = 'rgba(0,0,0,0.4)';
 }
 
 function closeEditForm() {
   document.querySelector('.edit-menu').style.marginLeft = '-250px';
   document.querySelector('.app-container').style.marginLeft = '0';
-  document.body.style.backgroundColor = '#fff';
+  document.querySelector('.loading-display').style.marginLeft = '0';
 }
 
-
-// FUNCTION TO DISPLAY/HIDE UPLOAD FORM - ALSO!! ADD CLASS="HIDDEN" TO <form class="upload-form" action="" enctype="multipart/form-data"> IN INDEX.HTML
 
 
 // event listeners
@@ -296,5 +296,3 @@ closeUploadBtn.addEventListener('click', closeUploadForm)
 
 // option button event listener to open menu is in getSQLtracks function, where we create the user tracks.
 closeEditBtn.addEventListener('click', closeEditForm)
-
-// document.body.addEventListener('play', )

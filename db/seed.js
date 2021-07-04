@@ -55,7 +55,7 @@ userIds.forEach( (userId, index) => {
 
 for (let i = 0; i < 100; i++) {
     let sql = `INSERT INTO tracks 
-            (track_name, user_id, cloudinary_url, genres)
+            (track_name, author_id, cloudinary_url, genres)
              VALUES ($1, $2, $3, $4)`
     let userId = Math.floor(Math.random() * userIds.length)
     let genreIndex = Math.floor(Math.random() * genres.length)

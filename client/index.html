@@ -15,8 +15,8 @@
     <form class="upload-form" action="" enctype="multipart/form-data">
       <fieldset class="">
         <legend>Upload a track</legend>
-        <input name="title" type="text" class="title-upload-input" placeholder="Track Title">
-        <select name="genre" class="genre-upload-input">
+        <input name="title" type="text" class="title-upload-input" placeholder="Track Title" required>
+        <select name="genre" class="genre-upload-input" required>
             <option value="" selected disabled>Select a Genre</option>
             <option value="">Dubstep</option>
             <option value="">Country</option>
@@ -28,7 +28,7 @@
             <option value="">Reggae</option>
             <option value="">Prog Rock</option>
         </select>
-        <input class="upload-input" name="upload-input" type="file" accept=".wav,.mp3,.m4a,.flac,.aac,.aiff,.ogg,.amr,.opus">
+        <input class="upload-input" name="upload-input" type="file" accept=".wav,.mp3,.m4a,.flac,.aac,.aiff,.ogg,.amr,.opus" required>
         <button>upload</button>
 
       </fieldset>
@@ -41,8 +41,8 @@
     <form class="edit-form" action="">
       <fieldset>
         <legend>Update Track</legend>
-        <input name="title" type="text" class="title-edit-input">
-        <select name="genre" class="genre-edit-input">
+        <input name="title" type="text" class="title-edit-input" required>
+        <select name="genre" class="genre-edit-input" required>
             <option value="">Dubstep</option>
             <option value="">Country</option>
             <option value="">Blues</option>
@@ -85,30 +85,7 @@
                 <img class="profile-pic" src="/images/john_doe.jpeg" alt="">
                 <h2>John Doe</h2>
                 <p class="membership">Member since Sept 2009</p> 
-                <div class="open-upload-btn">Upload</div>
-                <form class="hidden upload-form" action="" enctype="multipart/form-data">
-                  <fieldset>
-                    <legend>Upload a track</legend>
-                    <input name="title" type="text" class="title-upload-input" placeholder="Track Title">
-                    <select name="genre" class="genre-upload-input">
-                        <option value="" disabled>Select a Genre</option>
-                        <option value="">Dubstep</option>
-                        <option value="">Country</option>
-                        <option value="">Blues</option>
-                        <option value="">Heavy Metal</option>
-                        <option value="">Jazz</option>
-                        <option value="">Rock</option>
-                        <option value="">Disco</option>
-                        <option value="">Reggae</option>
-                        <option value="">Prog Rock</option>
-                    </select>
-                    <input class="upload-input" name="upload-input" type="file" accept=".wav,.mp3,.m4a,.flac,.aac,.aiff,.ogg,.amr,.opus">
-                    <button>upload</button>
-
-                  </fieldset>
-                </form>
-
-      
+                <div class="open-upload-btn">Upload</div>      
                 <h2>Tracks by John Doe</h2> 
                 <div class="user-tracks-section"></div>
             </div>
@@ -127,12 +104,17 @@
               </div>
               <div class="feed-section"></div>
             </div>
-        </main>
-        <footer>
+          </main>
+          <footer>
             <p> &copy; Tom, Anshu and Chris </p>
-        </footer>
-    </div>
-
+          </footer>
+        </div>
+        
+        <div class="loading-display">
+          <img class="preloader" src="/images/wheel.gif" alt="">
+          <h2>Uploading...</h2>
+        </div>
+        
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/index.js"></script>
