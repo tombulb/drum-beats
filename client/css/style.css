@@ -371,3 +371,7 @@ input, select, button {
 .log-in-button:hover {
     background-color: darkgrey;
 }
+
+button:hover {
+    cursor: pointer;
+}
