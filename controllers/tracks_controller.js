@@ -27,6 +27,9 @@ router.get('/', (req, res) => {
     .then(dbRes => {
       res.json(dbRes.rows)
     })
+    // cloudinary.image(`${wavForm}`, {transformation: [
+    //   {flags: "waveform"}
+    // ]})
 })
 
 router.get('/genre/:genre', (req, res) => {
