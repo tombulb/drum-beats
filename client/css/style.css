@@ -300,7 +300,13 @@ input, select, button {
 
 .upload-input {
     color: white;
+
 }
+
+.app-title {
+    color: white;
+}
+
 
 .loading-display {
   background-color: rgba(255, 255, 255, 0.5);
@@ -347,4 +353,21 @@ input, select, button {
 .copyright-footer {
   height: 20px;
   padding: 0;
+
+}
+
+.copyright-text {
+    color: grey;
+}
+
+.log-in-form {
+    padding-top: 0;
+}
+
+.username-input, .password-input, .log-in-button {
+    margin: 10px auto;
+    width: 100%;
+}
+.log-in-button:hover {
+    background-color: darkgrey;
 }

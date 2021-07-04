@@ -130,7 +130,7 @@ function getSQLTracks(dbTracks, includeUserTracks) {
 
       const optionDiv = document.createElement('div')
       const optionBtn = document.createElement('img')
-      optionBtn.setAttribute('src', 'images/gear-button.png')
+      optionBtn.setAttribute('src', 'images/gear-button-white.png')
       optionDiv.setAttribute('class', `option-div ${track.id}`)
       optionBtn.setAttribute('class', `option-btn ${track.id}`)
       optionDiv.appendChild(optionBtn)
