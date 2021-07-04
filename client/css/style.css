@@ -5,6 +5,8 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+/* scrollbar styling */
+
 .feed-section::-webkit-scrollbar, .user-tracks-section::-webkit-scrollbar {
     width: 0.4em;
 }
@@ -17,6 +19,18 @@
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+/* option button animations */
+
+.option-btn:hover{
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 body {
     height: 100vh;
@@ -196,7 +210,7 @@ main {
 .user-track-figure {
   margin-top: 5px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.685);
+  background-color: rgba(0, 0, 0, 0.308);
   margin-right: 20px;
   padding: 10px;
 }
