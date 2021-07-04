@@ -401,6 +401,8 @@ input, select, button {
 
 .copyright-text {
     color: grey;
+  background-color: lightgrey;
+  
 }
 
 .log-in-form {
