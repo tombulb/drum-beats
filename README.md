@@ -11,6 +11,27 @@ Deployed at https://beats-by-drums.herokuapp.com/
 
 A social networking media player geared for music producers to share their beats with other producers.
 
+## Database Schema
+
+CREATE DATABASE drum_beats;
+
+\c drum_beats;
+
+CREATE TABLE tracks (
+    id SERIAL PRIMARY KEY,
+    track_name TEXT,
+    author_id INT, 
+    cloudinary_url TEXT,
+    genres TEXT
+);
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    user_name TEXT,
+    password TEXT
+);
+
+
 ### Technologies
 - JavaScript and HTML - core technologies.
 - Node JS - for processing.
