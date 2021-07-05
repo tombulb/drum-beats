@@ -100,18 +100,19 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
   let sql = `UPDATE tracks SET track_name = $1, genres = $2 WHERE id=$3;`
-  db
-  .query(sql, [req.body.trackName, req.body.trackGenre.toLowerCase(), req.params.id])
+  db.query(sql, [req.body.trackName, req.body.trackGenre.toLowerCase(), req.params.id])
   .then(dbRes => {
     res.json({updated: true})
   })
 })
 
-router.get('/:id', (req, res) => {
-  db.query(`SELECT * FROM tracks WHERE ID = ${req.params.id};`)
+router.get('/update/:id', (req, res) => {
+  console.log('about to do a query')
+  db.query(`SELECT * FROM tracks WHERE id = ${req.params.id};`)
     .then(dbRes => {
       res.json(dbRes.rows)
     })
+
 })
 
 module.exports = router

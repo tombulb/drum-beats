@@ -238,10 +238,9 @@ function handleOptions(e) {
 
   axios({
     method: "get",
-    url: `/api/tracks/${e.target.classList[1]}`,
+    url: `/api/tracks/update/${e.target.classList[1]}`,
   })
   .then(response => {
-    console.log(response);
     editTitleInput.value = response.data[0].track_name
     editGenreInput.selectedOptions[0].textContent = response.data[0].genres
   })
