@@ -5,10 +5,21 @@ var http = require('http');
 var util = require('util');
 
 const {Pool} = require('pg')
-const db = new Pool({
-  database: 'drum_beats',
-  password: process.env.PG_PASSWORD
-})
+
+let pool;
+if (process.env.PRODUCTION) {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  })
+} else {
+  pool = new Pool({
+    database: 'drum_beats',
+    password: process.env.PG_PASSWORD
+  })
+}
 
 const cloudinary = require('cloudinary').v2;
 const { createSecretKey } = require('crypto');
