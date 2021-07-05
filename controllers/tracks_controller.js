@@ -6,16 +6,16 @@ var util = require('util');
 
 const {Pool} = require('pg')
 
-let pool;
+let db;
 if (process.env.PRODUCTION) {
-  pool = new Pool({
+  db = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }
   })
 } else {
-  pool = new Pool({
+  db = new Pool({
     database: 'drum_beats',
     password: process.env.PG_PASSWORD
   })
