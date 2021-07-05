@@ -24,6 +24,7 @@ if (process.env.PRODUCTION) {
 const cloudinary = require('cloudinary').v2;
 const { createSecretKey } = require('crypto');
 const { response } = require('express');
+const { NONAME } = require('dns');
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
